@@ -1,60 +1,59 @@
-Zdravo Dejan,
+# Installation guide
 
-kot dogovorjeno ti pošiljam nekaj informacij glede dosedanjih uspešnih projektov s tehnologijo Blockchain:
+### Prerequisites:
 
-2016:
+Install `git` client and clone FutureHackaton repository:
 
-Golem Network
-https://golem.network/
-raised about $8.6 million in just a couple of hours
+```bash
+git clone https://github.com/CherrioPlatform/FutureHackaton.git
+```
 
-Tezos
-https://www.tezos.com/
-raised $232 Million
+## Database
 
-ICONOMI
-https://www.iconomi.net/
-raised US$10.5 Million
+### Requirements: 
 
-WAVES
-https://wavesplatform.com/
-team raised US$16 Million
+MySQL database server (tested with `MariaDB` version 10.1.24)
 
-ETHEREUM
-https://www.ethereum.org/
-raised US$18m over the course of 42 days
+### Installation:
 
-Status Network
-https://status.im/
-raised $275,814,878.06 USD in 3 hours
+Checkout **database** branch:
+```bash
+git checkout https://github.com/CherrioPlatform/FutureHackaton.git
+```
+Execute `databaseMPV.sql` to deploy all required tables. Tables are already populated with demo data.
 
-Civic
-https://www.civic.com/
-raised $33 million
+## Platform
 
-Pillar Token
-raises $21 Million
+### Requirements: 
 
-Funfair Token
-Raises $26 Million In 4 Hours
+Apache server that supports `PHP` (tested with `PHP` version 5.6.3)
 
-Trenutni ICO:
-https://www.everex.io/
-https://obsidianplatform.com/
+### Installation: 
 
+- Checkout **platform** branch:
+```bash
+git checkout https://github.com/CherrioPlatform/FutureHackaton.git
+```
+- Move all data to path, where you want to be located.
+- Update config file (application/config/database.php) with connections string and authentication data from your database server. If used on same machine, you can use localhost.
+- Update Twitter and Facebook authorization tokens (application/config/constants.php):
+```bash
+TWITTER_CONSUMER_KEY
+TWITTER_CONSUMER_SECRET
+FACEBOOK_ID
+```
 
-Nekaj vrhunskih dizajnov:
-https://www.binance.com/
-https://www.everex.io/
-https://status.im/
-https://cofound.it/en/ (DOBER KONCEPT STRANI - PRIMEREN ZA NAS)
-https://www.kickico.com/ (DOBER KONCEPT STRANI - PRIMEREN ZA NAS)
+## Smart Contract
 
+### Requirements: 
 
+All smart contracts should be deployed on Rinkeby Ethereum testnet (Solidity v.0.4.19 used)
 
-SPLETNA STRAN ZA ICO JE SESTAVLJENA IZ:
+### Installation:
 
-WHITEPAPER-JA
-VIDEO (predstavitveni video, ki vizualno predstavi idejo)
-EKIPA (predstavljeni člani ekipe)
-ROADMAP / TIMELINE (nakažemo kdaj se bo kaj delalo po tem ko se zberejo sredstva)
+- Checkout **smart-contracts** branch:
+```bash
+git checkout https://github.com/CherrioPlatform/FutureHackaton.git
+```
+- Deploy campaignToken.sol using environment of your choice (e.g. Online Solidity Browser version 0.4.20 commit)
+- Check on Etherscan.io for smart contract's address.
