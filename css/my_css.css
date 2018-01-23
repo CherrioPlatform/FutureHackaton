@@ -1,0 +1,7 @@
+.btn-finished{
+    color: white !important;
+}
+.btn-finished:hover{
+     background-color: #D21242 !important;
+     cursor: default;
+}

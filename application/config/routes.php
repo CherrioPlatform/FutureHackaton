@@ -36,7 +36,13 @@
 | This route will tell the Router what URI segments to use if those provided
 | in the URL cannot be matched to a valid route.
 */
-$route['default_controller'] = "main";
+$route['default_controller'] = "campaign";
+$route['(\w{2})/past-campaigns'] = "campaign/campaigns";
+$route['(\w{2})/past-campaigns/(:any)'] = "campaign/campaigns/$2";
+$route['(\w{2})/campaigns'] = "campaign/campaigns";
+$route['(\w{2})/campaigns/(:any)'] = "campaign/campaigns/$2";
+$route['(\w{2})/campaigns/(:any)'] = "campaign/campaigns/$2";
+$route['(\w{2})/organization/(:any)'] = "organization/index/$2";
 $route['404_override'] = '';
 $route['(\w{2})/(.*)'] = '$2';
 $route['(\w{2})'] = $route['default_controller'];

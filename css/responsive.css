@@ -1,0 +1,902 @@
+@media screen and (max-width: 1200px){
+	.campaign-detail .campaign-author .author-profile,
+	.campaign-detail .campaign-author .author-address {
+		float: none;
+	}
+	.site-header .login,
+	.site-header .search-icon,
+	.site-header .main-menu{
+		margin-left: 30px;
+	}
+	.site-header .main-menu ul li{
+		margin-left: 20px;
+	}
+	.site-main .sideshow .sideshow-content h1{
+		font-size: 38px;
+	}
+	.section .section-item .section-box .process .process-info div span{
+		margin-right: 55px;
+	}
+	.staff-picks.section .staff-picks-item .staff-picks-item-content .process-info div span{
+		margin-right: 60px !important;
+	}
+	.campaign-big-box .process .process-info span,
+	.campaign-content .campaign-box .process .process-info span{
+		margin-right: 0 !important;
+	}
+	.top-site{
+		height: 600px;
+	}
+	.top-site .container{
+		top: 140px;
+	}
+	.statics-content .statics-item{
+		min-height: 210px;
+	}
+	.campaign-detail .button .btn-secondary,
+	.campaign-detail .button .btn-primary{
+		margin-right: 0;
+	}
+	.product-table tr td,
+	.product-table tr th{
+		padding: 15px;
+	}
+	.coupon-form form input{
+		width: 65%;
+	}
+	.project-love-item a.project-love-image,
+	.project-love-item a.project-love-image img{
+		width: 100%;
+	}
+	.project-love-item a.project-love-image{
+		margin-bottom: 20px;
+	}
+	.project-love-item .project-love-item-content{
+		padding: 0;
+	}
+}
+@media screen and (min-width: 992px){
+	.main-menu > ul > li > a:hover:after,
+	.main-menu > ul > li.active > a:after {
+		width: 30px;
+		height: 2px;
+		background-color: #d21242;
+		content: " ";
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		-webkit-transform: translateX(-50%);
+		-ms-transform: translateX(-50%);
+		transform: translateX(-50%);
+	}
+}
+@media screen and (max-width: 992px){
+
+	.account-bar {
+		margin-bottom: 50px;
+	}
+	.latest-campaigns{
+		padding-top: 60px;
+		padding-bottom: 60px;
+	}
+	.account-wrapper, .form-login,
+	.faq-content,
+	.campaign-form,
+	.page-content {
+		padding-top: 60px;
+	}
+	.campaign-item .campaign-box {
+		padding: 20px;
+	}
+	.campaign-detail .campaign-image {
+		padding-right: 0;
+	}
+	.campaign-icon-1 {
+		top: -60px;
+		width: 50px;
+		height: 50px;
+		background-size: contain;
+	}
+	.site-header{
+		height: auto;
+		z-index: 9;
+		position: relative;
+		background-color: #fff;
+	}
+	.c-hamburger{
+		display: block;
+	}
+	.main-menu ul{
+		position: fixed;
+		z-index: 999999;
+		background-color: #fff;
+		top: 57px;
+		left: -100%;
+		margin-left: 0;
+		border-top: 1px solid #D21242;
+		width: 100%;
+		transition: all 0.4s;
+	}
+	.main-menu.open ul{
+		left: 0;
+	}
+	body.menu-open:before{
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		display: block;
+		background: rgba(0, 0, 0, 0.6);
+		content: "";
+		z-index: 9;
+		transition: all 0.3s ease-in-out 0s;
+		-moz-transition: all 0.3s ease-in-out 0s;
+		-o-transition: all 0.3s ease-in-out 0s;
+		-webkit-transition: all 0.3s ease-in-out 0s;
+		-ms-transition: all 0.3s ease-in-out 0s;
+	}
+	.site-header .main-menu ul li{
+		display: block;
+		margin-left: 0;
+		line-height: normal;
+		border-bottom: 1px dashed #ccc;
+	}
+	.site-header .main-menu ul li:last-child{
+		border-bottom: 0;
+	}
+	.site-header .main-menu ul li a{
+		padding: 13px 15px;
+	}
+	.site-header .login, .site-header .search-icon {
+		margin-right: 30px;
+	}
+	.site-main .sideshow .sideshow-content{
+		max-width: 100%;
+		width: auto;
+		padding-right: 15px;
+	}
+	.site-main .sideshow{
+		height: 550px;
+	}
+	.sideshow-content {
+		padding-left: 0;
+	}
+	.site-main .section,
+	.campaign,
+	.explore,
+	.project-love{
+		padding: 100px 0 70px;
+	}
+	.staff-picks{
+		padding: 30px 0 0;
+	}
+	.campaign .campaign-item{
+		margin-bottom: 30px;
+	}
+	.campaign-detail .campaign .campaign-item{
+		margin-bottom: 0px;
+	}
+	.campaign-box .process .process-info div span{
+		margin-right: 150px !important;
+	}
+	.staff-picks .staff-picks-item a.staff-picks-image{
+		float: none;
+	}
+	.staff-picks .staff-picks-item a.staff-picks-image img{
+		width: 100%;
+	}
+	.staff-picks .staff-picks-item .staff-picks-item-content{
+		padding: 0;
+		margin-top: 15px;
+	}
+	.staff-picks-item-content .staff-picks-description{
+		height: auto;
+		max-height: initial;
+		overflow: initial;
+		margin-bottom: 10px;
+	}
+	.staff-picks.section .staff-picks-item .staff-picks-item-content .process-info div span{
+		margin-right: 150px !important; 
+	}
+	.main-menu ul li i{
+		display: inline-block;
+		float: right;
+		line-height: 18px;
+	}
+	.main-menu ul li > .sub-menu{
+		position: static;
+		width: auto;
+		opacity: 1;
+		visibility: visible;
+		border-top: 1px dashed #ccc;
+		display: none;
+		transition: all 0.4s;
+	}
+	.main-menu ul li > .sub-menu li{
+		padding-left: 20px;
+		border-top: 0;
+	}
+	.partners{
+		padding: 30px 0;
+	}
+	.footer-menu-item.newsletter,
+	.campaign-history{
+		margin-top: 30px;
+	}
+	.site-footer .footer-menu{
+		padding: 30px 0 20px;
+	}
+	.video iframe{
+		max-width: 100%;
+	}
+	.statics-content .statics-item{
+		min-height: 161px;
+		margin-bottom: 30px;
+	}
+	.team-item,
+	.comment-respond{
+		margin-bottom: 30px;
+	}
+	.blog-grid.full-width .post{
+		width: 50%;
+	}
+	.campaign-detail main > .campaign-content {
+		padding-top: 60px;
+	}
+	.site-main{
+		padding-bottom: 60px;
+	}
+	.main-content{
+		margin-bottom: 30px;
+	}
+	.campaign-detail .campaign-image,
+	.campaign-detail .campaign-image img,
+	.campaign-detail .campaign-box{
+		width: 100%;
+		float: none;
+	}
+	.campaign-detail .campaign-box{
+		padding-left: 0;
+		margin-top: 10px;
+	}
+	.campaign-detail .button .btn-secondary{
+		margin-left: 8px;
+	}
+	.campaign-detail .campaign-box .campaign-description{
+		max-height: 100% !important;
+	}
+	.campaign-tabs .campaign-content{
+		margin-bottom: 30px;
+	}
+	.calculate-shipping{
+		margin-bottom: 30px;
+	}
+	.coupon-form form input{
+		width: 78%;
+	}
+	.coupon-form form{
+		margin-bottom: 15px;
+	}
+	.coupon-form .button{
+		float: none;
+	}
+	.order-notes{
+		margin-bottom: 30px;
+	}
+	.coming-soon .site-header{
+		background-color: initial;
+	}
+	.contact-content .entry-content,
+	.form-contact,
+	.contact-info{
+		height: auto;
+	}
+	.form-contact{
+		margin-bottom: 30px;
+	}
+	.maps #map{
+		margin-top: 30px;
+	}
+	.how-it-work{
+		padding: 60px 0;
+		margin-top: 60px;
+	}
+	.item-work .item-content h3{
+		margin-bottom: 0px;
+	}
+	.item-work:after{
+		content: '';
+		clear: both;
+		display: block;
+	}
+	.item-work{
+		margin-bottom: 20px;
+	}
+	.campaign-big-item a.campaign-big-image {
+    float: none;
+  }
+	.campaign-big-item a.campaign-big-image img{
+		width: 100%;
+	}
+	.campaign-big-item .campaign-big-box{
+		padding: 20px;
+		margin: 0;
+	}
+	.campaign-big-box .process .process-info span{
+		margin-right: 100px !important;
+	}
+}
+@media screen and (max-width: 767px){
+	.campaign-detail .campaign-box h3 {
+		font-size: 20px;
+	}
+	.site-main .campaign-content .campaign {
+		padding: 20px;
+		border: 0;
+		background-color: #FFF;
+	}
+	.campaign-tabs.support-campaign {
+		background-color: #FFF;
+		padding: 0;
+	}
+	.campaign-detail .process .process-info {
+		margin-bottom: 20px;
+	}
+	.campaign-detail .campaign-box .raised {
+		background-color: #eee;
+	}
+	.campaign-detail .share {
+		margin-top: 20px;
+	}
+	h4 {
+		font-size: 14px;
+	}
+	.section-updates {
+		padding-bottom: 30px;
+	}
+	.site-main .section, .campaign, .explore, .project-love {
+		padding: 50px 0 20px;
+	}
+	.description {
+		margin-bottom: 50px;
+	}
+	.title {
+		font-size: 24px;
+	}
+	.campaign-item .campaign-box {
+		padding: 20px 20px 10px;
+	}
+	.campaign-detail .campaign-item .campaign-box {
+		padding: 0;
+		margin-top: 30px;
+	}
+	.site-main .sideshow .sideshow-content h1{
+		font-size: 22px;
+	}
+	.site-main .sideshow .sideshow-content .sideshow-description{
+		font-size: 14px;
+	}
+	.campaign-box .process .process-info div span{
+		margin-right: 90px !important;
+	}
+	.campaign-history .tabs-controls li a{
+		font-size: 14px;
+	}
+	.campaign-history .tabs-controls li{
+		margin-right: 30px;
+	}
+	.product-table{
+		overflow-x: auto; 
+	}
+	.product-table table{
+		width: 767px;
+	}
+	.coupon-form form input{
+		width: 100%;
+		padding: 0 145px 0 15px;
+	}
+	.coming-soon .site-header{
+		padding: 40px 0;
+	}
+	.coming-soon .site-footer .footer-copyright{
+		padding: 40px;
+	}
+	.coming-soon .site-main .time{
+		margin-top: 60px;
+	}
+	.coming-soon .site-main{
+		padding: 0;
+	}
+	.coming-soon .site-main .time .time-item p{
+		font-size: 60px;
+	}
+	.coming-soon .site-main .time .time-item span{
+		margin-top: 10px;
+	}
+	.product{
+		width: 33.33%;
+	}
+	.newsletter-popup{
+		width: auto;
+		margin: 0 30px;
+	}
+	.top-header{
+		display: none;
+	}
+	.description.left-description{
+		width: 65%;
+	}
+	.campaigns-action .sort,
+	.campaigns-action .filter{
+		float: none;
+	}
+	.campaigns-action .sort{
+		margin-bottom: 15px;
+	}
+}
+@media screen and (max-width: 576px){
+	.proof-of-charity-points {
+		position: static;
+		margin-top: 25px;
+	}
+	.proof-of-charity-points .label-proof-of-charity-points {
+		text-align: left;
+	}
+	.table-container { overflow-x: scroll; }
+	.table-container table { width: 600px }
+	.profile-box li strong {
+		width: 100%;
+	}
+	.site-header .login a{
+		font-size: 0;
+		padding: 0 14px;
+	}
+	.site-header .login-button a:before{
+		content: "\f13e";
+		font-size: 16px;
+		font-family: FontAwesome;
+		margin-right: 5px;
+	}
+	.site-header .login,
+	.site-header .search-icon{
+		margin-left: 10px;
+	}
+	.c-hamburger{
+		right: 100px;
+	}
+	.site-main .sideshow{
+		height: 500px;
+	}
+	.sideshow-content h1 {
+		margin-bottom: 20px;
+	}
+	.process .process-info div{
+		margin-bottom: 10px;
+	}
+	.section .section-item .section-box .process .process-info div span{
+		margin-right: 70px;
+	}
+	.explore .col-6,
+	.team-content .col-6,
+	.statics-content .col-6{
+		width: 100%;
+		flex: initial;
+		max-width: 100%;
+	}
+	.process .process-info span,
+	.campaign-big-box .process .process-info span{
+		font-size: 13px;
+		margin-right: 0!important;
+	}
+	.process .process-info{
+		margin-bottom: 0;
+	}
+	.staff-picks-content .owl-controls{
+		display: none;
+	}
+	.staff-picks-author .author-address,
+	.staff-picks-author .author-profile{
+		float: none;
+		display: block;
+	}
+	.staff-picks-author .author-address{
+		text-align: left;
+		margin-top: 10px;
+	}
+	.latest{
+		margin-bottom: 30px;
+	}
+	.latest .latest-button{
+		margin-top: 0;
+	}
+	.footer-menu .col-4{
+		width: 50%;
+		margin-bottom: 30px;
+	}
+	.footer-menu .col-12{
+		width: 50%;
+	}
+	.footer-menu-item.newsletter{
+		margin: 0;
+	}
+	.site-footer .footer-menu,
+	.project-love{
+		padding: 30px 0 0 0;
+	}
+	.site-footer .footer-copyright{
+		padding: 20px 0;
+	}
+	.site-main{
+		padding-bottom: 60px;
+	}
+	.top-site h1{
+		font-size: 24px;
+		max-width: 100%;
+	}
+	.top-site{
+		height: 500px;
+	}
+	.top-site .container{
+		top: 100px;
+	}
+	.video iframe{
+		height: 300px;
+	}
+	.video .video-wrapper{
+		margin-top: -150px;
+	}
+	.statics-content .statics-item{
+		min-height: auto;
+	}
+	.page-title h1{
+		font-size: 24px;
+	}
+	.blog-grid.full-width .post,
+	.blog-grid .post{
+		width: 100%;
+	}
+	.page-navigation{
+		margin-top: 0;
+	}
+	.site-main{
+		padding-bottom: 30px;
+	}
+	.campaign-detail .campaign-price{
+		margin-bottom: 15px;
+	}
+	.campaign-detail .button .btn-secondary{
+		margin-left: 0;
+	}
+	.campaign-detail .button .btn-primary{
+		margin-right: 8px;
+	}
+	.campaign-history{
+		margin-top: 0;
+	}
+	.campaign-history .tabs-controls li{
+		margin-right: 20px;
+	}
+	.campaign-history .tabs-controls li a{
+		font-size: 12px;
+	}
+	.cart .main-content .col-6{
+		width: 100%;
+		flex: initial;
+		max-width: 100%;
+	}
+	.coupon-form .button .update-cart{
+		margin-right: 8px;
+	}
+	.coming-soon .site-main .desc{
+		width: 100%;
+	}
+	.time .col-3{
+		width: 50%;
+		margin-bottom: 30px;
+	}
+	.coming-soon .site-main .button{
+		margin-top: 20px;
+	}
+	.coming-soon .site-footer .footer-copyright p{
+		float: none;
+		margin: 0 0 15px 0;
+		text-align: center;
+	}
+	.coming-soon .site-footer .footer-copyright .follow{
+		float: none;
+		text-align: center;
+	}
+	.campaigns .campaign-content .col-6{
+		width: 100%;
+		flex: initial;
+		max-width: 100%;
+	}
+	.product{
+		width: 50%;
+	}
+	.newsletter-popup{
+		height: 380px;
+	}
+	.form-content form input{
+		position: relative;
+		width: 100%;
+	}
+	.form-content form button{
+		position: relative;
+		width: 100%;
+		margin-top: 20px;
+	}
+	.coming-soon .site-main .time li{
+		width: 50%;
+		margin-bottom: 30px;
+	}
+	.project-love .col-9,
+	.project-love .col-3{
+		width: 100%;
+		flex: initial;
+		max-width: 100%;
+	}
+	.project-love .tab-menu{
+		padding-left: 100px;
+	}
+	.project-love .tab-menu{
+		padding: 0;
+		margin-top: 20px;
+	}
+	ul.menu-category{
+		border-left: 0;
+		border-top: 1px solid #ededed;
+		letter-spacing: -0.3em;
+	}
+	ul.menu-category li{
+		display: inline-block;
+		width: 25%;
+		letter-spacing: normal;
+	}
+	ul.menu-category li.active::before,
+	ul.menu-category li.active::after{
+		display: none;
+	}
+	ul.menu-category li{
+		padding: 0 5px;
+	}
+	ul.menu-category li.active a{
+		color: #D21242;
+	}
+	.project-love .tab-menu a.all-project{
+		left: 5px;
+		top: -30px;
+	}
+	.how-it-work{
+		padding: 30px 0;
+		margin-top: 0;
+	}
+	.campaign-content .col-6{
+		width: 100%;
+		flex: initial;
+		max-width: 100%;
+	}
+}
+@media screen and (max-width: 450px){
+
+	.forgot-password {
+		text-align: left;
+	}
+
+	.footer-menu .col-4,
+	.footer-menu .col-12{
+		width: 100%;
+		flex: initial;
+		max-width: 100%;
+	}
+	.site-footer .footer-copyright p,
+	.site-footer .footer-copyright a.back-top{
+		font-size: 12px;
+	}
+	.campaign-box .process .process-info div span{
+		margin-right: 50px !important;
+	}
+	.btn-secondary{
+		margin-right: 10px;
+	}
+	.entry-content ul.post-meta li{
+		margin-bottom: 5px;
+	}
+	.widget li,.widget li a{
+		font-size: 14px;
+	}
+	.widget.widget-recent{
+		margin-bottom: 0;
+	}
+	.widget.widget-search{
+		padding: 0;
+	}
+	.widget{
+		padding: 15px;
+	}
+	.widget-title{
+		margin-bottom: 15px;
+	}
+	.campaign-history .tabs-controls{
+		border: 0;
+	}
+	.campaign-history .tabs-controls li{
+		display: block;
+		padding-bottom: 5px;
+		margin-bottom: 5px;
+	}
+	.campaign-history .tabs-controls li a{
+		font-size: 14px;
+	}
+	.coupon-form .button button{
+		width: 100%;
+	}
+	.coupon-form .button .update-cart{
+		margin-right: 0;
+		margin-bottom: 15px;
+	}
+	form .align-left,
+	form .align-right{
+		float: none;
+		width: 100%;
+		padding: 0;
+	}
+	form .align-left{
+		margin-bottom: 30px;
+	}
+	.different-address label{
+		font-size: 14px;
+	}
+	.maps #map{
+		height: 300px;
+	}
+	.form-login .inline p,
+	.form-login .btn-primary{
+		float: none;
+		display: block;
+	}
+	.form-login .inline p{
+		margin-top: 10px;
+	}
+	.shop-slider .owl-controls .owl-page{
+		height: 80px;
+	}
+	.reviews .reviews-vote .vote,
+	.shop-grid-fillter p{
+		float: none;
+		margin-bottom: 10px;
+	}
+	.reviews .reviews-vote .btn-primary{
+		float: none;
+		display: block;
+	}
+	.product{
+		width: 100%;
+	}
+	.shop-grid-fillter p,
+	.shop-grid-fillter .field-select,
+	.form-header img{
+		float: none;
+	}
+	.form-header img{
+		display: block;
+		margin: 0 auto;
+		margin-bottom: 10px;
+		width: 60px;
+		height: 60px;
+	}
+	.form-header{
+		padding: 20px 30px;
+	}
+	.form-header .form-text{
+		padding: 0;
+	}
+	ul.menu-category li{
+		width: 33.33%;
+	}
+}
+@media screen and (max-width: 360px){
+	.site-header .login,
+	.site-header .search-icon{
+		margin-left: 6px;
+	}
+	.c-hamburger{
+		right: 100px;
+	}
+	.site-main .sideshow{
+		height: 500px;
+	}
+	.btn-secondary,
+	.btn-primary{
+		line-height: 34px;
+		padding: 0 15px;
+	}
+	.btn-primary{
+		line-height: 38px;
+	}
+	.site-main .section,
+	.campaign,
+	.explore{
+		padding: 30px 0 0;
+	}
+	.staff-picks{
+		padding: 10px 0 0;
+	}
+	.site-footer .footer-copyright a.back-top{
+		font-size: 0;
+	}
+	.main-404 .btn-secondary,
+	.main-404 .btn-primary{
+		width: 100%;
+		line-height: 42px;
+		height: 42px;
+	}
+	.main-404 .btn-secondary{
+		margin: 0 0 15px 0;
+		line-height: 38px;
+	}
+	.top-site{
+		height: 400px;
+	}
+	.top-site .container{
+		top: 60px;
+	}
+	.statics-content .statics-item h3,
+	.page-title h1,
+	.coming-soon .site-main h2{
+		font-size: 22px;
+	}
+	.title,.coming-soon .site-main h1{
+		font-size: 20px;
+	}
+	.entry-content ul.list,
+	.entry-content .quote{
+		margin-left: 30px;
+	}
+	.title.left-title{
+		font-size: 18px;
+	}
+	.entry-content ul.post-meta{
+		margin: 15px 0;
+	}
+	.campaign-detail .campaign-price input{
+		width: 100px;
+		height: 38px;
+	}
+	.campaign-detail .process .process-info{
+		margin-bottom: 0px;
+	}
+	.calculate-shipping .field .align-left,
+	.calculate-shipping .field .align-right{
+		float: none;
+		padding: 0;
+		width: 100%;
+	}
+	.calculate-shipping .align-left.field-select::after{
+		right: 0;
+	}
+	.calculate-shipping .field .align-left{
+		margin-bottom: 20px;
+	}
+	.coming-soon .site-main .time .time-item p{
+		font-size: 40px;
+		display: inline-block;
+		line-height: 100px;
+	}
+	.coming-soon .site-main .time .time-item span{
+		margin-top: 0;
+	}
+	ul.menu-category li{
+		width: 50%;
+	}
+	.find-city form button{
+		height: 46px;
+	}
+	.campaigns-action .filter span{
+		margin-bottom: 10px;
+	}
+	.list-faq li a{
+		font-size: 14px;
+	}
+}

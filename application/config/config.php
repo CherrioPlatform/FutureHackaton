@@ -15,8 +15,11 @@
 |
 */
 $config['base_url']			= CONST_BASE_URL;
-$config['facebook_url']		= 'https://www.facebook.com/';
-$config['twitter_url']		= 'https://twitter.com/';
+$config['facebook_url']		= 'https://www.facebook.com/CherrioPlatform';
+$config['twitter_url']		= 'https://www.twitter.com/CherrioPlatform';
+$config['telegram_url']		= 'https://t.me/CherrioPlatform';
+$config['instagram_url']	= 'https://www.instagram.com/CherrioPlatform';
+$config['linkedin_url']		= 'https://www.linkedin.com/company/11326200';
 $config['meta_title']		= 'CHERR.IO Platform - MVP';
 $config['meta_description']	= ' ';
 $config['fb_app_id']   = '888834174613208';

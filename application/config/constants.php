@@ -13,7 +13,7 @@
 | always be used to set the mode correctly.
 |
 */
-$cms_folder = "";
+$cms_folder = "mvp_cms/";
 $main_folder = "";
 
 define('FILE_READ_MODE', 0644);
@@ -30,13 +30,18 @@ define('CONST_IMG_THUMB_URL', CONST_BASE_URL_CMS."img/upload/thumb/");
 define('CONST_IMG_URL',CONST_BASE_URL_CMS."img/upload/");
 
 // Email SMTP config constants
-define('SMTP_PASSWORD', '');
-define('SMTP_USERNAME', '');
-define('SMTP_HOST', '');
-define('SMTP_PORT', '');
-define('EMAIL_SENDER', '');
+define('SMTP_PASSWORD', 'Cherrio,.');
+define('SMTP_USERNAME', 'futurehack@cherr.io');
+define('SMTP_HOST', 'mail.cherr.io');
+define('SMTP_PORT', '587');
+define('EMAIL_SENDER', 'futurehack@cherr.io');
 define('EMAIL_TITLE', '');
 define('EMAIL_SUBJECT', '');
+
+
+// Blockchain config
+define('ETH_TESTNET', TRUE);
+
 /*
 |--------------------------------------------------------------------------
 | File Stream Modes

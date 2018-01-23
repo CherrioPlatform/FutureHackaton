@@ -19,12 +19,12 @@
     <meta name="author" content="CHERR.IO">
     <?php
     if(isset($fb_share) && $fb_share && isset($item->id)){
-        $img = json_decode($this->main_model->ReturnPageMedia($item->id, null,9));
+        $img = json_decode($this->campaign_model->page_media($item->id, null,9));
         ?>
         <meta property="og:title" content='<?=strip_tags($item->title)?>' />
         <meta property="og:type" content="article" />
         <meta property="og:image" content='<?= CONST_IMG_URL. str_replace(' ', '%20',$img[0]->path);?>' />
-        <meta property="og:url" content='<?php echo $share_url; ?>' />
+        <meta property="og:url" content='<?php echo $fb_share; ?>' />
         <meta property="og:description" content='<?=strip_tags(truncate($item->short_description,100))?>' />
         <?php
     }
@@ -32,6 +32,11 @@
 
     <link rel="icon" href="<?php echo base_url(); ?>img/favicon.png" type="image/png" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/font-cherrio.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/style.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/responsive.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/my_css.css">
 
 </head>
 <body class="<?php echo (isset($page_name)) ? $page_name : '';?>">
@@ -52,3 +57,19 @@
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
 
+<script>window.twttr = (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0],
+            t = window.twttr || {};
+        if (d.getElementById(id)) return t;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+
+        t._e = [];
+        t.ready = function(f) {
+            t._e.push(f);
+        };
+
+        return t;
+    }(document, "script", "twitter-wjs"));</script>
