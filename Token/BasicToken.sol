@@ -9,7 +9,7 @@ contract BasicToken is ERC20Basic {
     // Balances for each account
     mapping(address => uint256) balances;
 
-    // Returns the token balance for account
+    // Get the token balance for account
     function balanceOf(address _address) public constant returns (uint256 balance) {
         return balances[_address];
     }
