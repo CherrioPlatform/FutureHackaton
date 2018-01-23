@@ -7,6 +7,7 @@ $donations = (get_number_of_donators($item->eth_address));
 if($raised >= $item->goal && $item->page_status == 1){
     $this->campaign_model->update_campaign_status($item->id);
 }
+
 ?>
 <div id="wrapper">
     <?php echo Modules::run('page_modules/header'); ?>
@@ -126,42 +127,67 @@ if($raised >= $item->goal && $item->page_status == 1){
                                 else{
                                     ?>
                                     <div class="btn-primary">Campaign finished</div>
-                                    <button data-toggle="modal" data-target="#myModalDoc" class="btn-primary btn-documents" type="submit"><i class="doc-icon"></i> Upload documents</button>
-                                    <div class="uploaded-docs">
-                                        <ul>
-                                            <li><a class="document-icon"></a></li>
-                                            <li><a class="document-icon"></a></li>
-                                            <li><a class="document-icon"></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="vote-docs">
-                                        <p><strong>VOTE DOCUMENTS</strong></p>
-                                        <br>
-                                        <a href="#" class="btn-primary btn-good-bad"><i class="good-icon"></i> Good</a>
-                                        <a href="#" class="btn-primary btn-good-bad"><i class="bad-icon"></i> Bad</a>
-                                    </div>
+                                    <?php
+                                       if(isset($user_data) && $user_data->user_id == $item->organisation_id){
+                                           ?>
+                                           <button data-toggle="modal" data-target="#myModalDoc" class="btn-primary btn-documents" type="submit"><i class="doc-icon"></i> Upload documents</button>
+                                           <div id="myModalDoc" class="modal fade" role="dialog">
+                                               <div class="modal-dialog">
+                                                   <div class="modal-content">
+                                                       <div class="modal-header">
+                                                           <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                           <h4 class="modal-title"><?=$item->title;?></h4>
+                                                       </div>
+                                                       <div class="modal-body" style="text-align: center; padding: 50px 0">
+                                                           <p>Upload documents:</p>
+                                                           <br><br>
+
+                                                           <input type="hidden" name="campaign_id"  id="campaign_id" value="<?=$item->id?>"/>
+                                                           <input type="hidden" name="organisation_id" value="<?=$item->organisation_id?>"/>
+                                                           <form action="post" id="form_media_upload" class="dropzone">
+                                                               <div class="fallback">
+                                                                   <input name="file" type="file" multiple />
+                                                               </div>
+                                                           </form>
+
+                                                           <button type="button" class="btn btn-default btnMediaUpload">Upload</button>
+                                                       </div>
+                                                       <div class="modal-footer">
+                                                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                       </div>
+                                                   </div>
+                                               </div>
+                                           </div>
+                                           <?php
+                                       }
+                                    ?>
+                                    <?php
+                                        if(isset($item->proof_image) && $item->proof_image != NULL){
+                                            ?>
+                                            <div class="uploaded-docs">
+                                                <ul>
+                                                    <li><a target="_blank" href="<?= base_url()?>mvp_cms/campaigns/<?=$item->proof_image?>" class="document-icon"></a></li>
+                                                </ul>
+                                            </div>
+                                            <?php
+                                                if(isset($user_data) && $user_data->user_id != $item->organisation_id){
+                                                    ?>
+                                                    <div class="vote-docs">
+                                                        <p><strong>VOTE DOCUMENTS</strong></p>
+                                                        <br>
+                                                        <a href="#" class="btn-primary btn-good-bad"><i class="good-icon"></i> Good</a>
+                                                        <a href="#" class="btn-primary btn-good-bad"><i class="bad-icon"></i> Bad</a>
+                                                    </div>
+                                                    <?php
+                                                }
+                                            ?>
+                                            <?php
+                                        }
+                                    ?>
                                     <?php
                                 }
                                 ?>
-                                <div id="myModalDoc" class="modal fade" role="dialog">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                <h4 class="modal-title"><?=$item->title;?></h4>
-                                            </div>
-                                            <div class="modal-body" style="text-align: center; padding: 50px 0">
-                                                <p>Upload documents:</p>
-                                                <br><br>
-                                                <input type="file" id="documents" name="documents" multiple>
-                                                <button type="button" class="btn btn-default">Upload</button>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
                             </div>
                             <div class="share">
                                 <p>Share this campaign</p>

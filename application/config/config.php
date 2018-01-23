@@ -22,6 +22,8 @@ $config['instagram_url']	= 'https://www.instagram.com/CherrioPlatform';
 $config['linkedin_url']		= 'https://www.linkedin.com/company/11326200';
 $config['meta_title']		= 'CHERR.IO Platform - MVP';
 $config['meta_description']	= ' ';
+
+
 /*
 |--------------------------------------------------------------------------
 | Index File

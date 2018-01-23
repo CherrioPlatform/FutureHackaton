@@ -207,4 +207,43 @@ jQuery(document).ready(function($) {
         $('.list-faq li a').not(this).next().slideUp().parent().removeClass('open');
         $(this).next().slideToggle().parent().addClass('open');
     });
+
+
+
 });
+
+if($("#form_media_upload").length > 0){
+    Dropzone.autoDiscover = false;
+    var myDropzoneTestim = new Dropzone('#form_media_upload', {
+        url: base_urll +"campaign/upload_image",
+        params: {
+            campaign_id: $("#campaign_id").val(),
+        },
+        autoProcessQueue: false,
+        addRemoveLinks: true,
+        dictRemoveFile: "Remove",
+        thumbnailWidth:"190",
+        thumbnailHeight:"190",
+        maxFiles: 1,
+        maxFilesize: 3,
+        acceptedFiles: "image/*"
+    });
+    function TriggerDropzoneTestim(){
+        myDropzoneTestim.options.autoProcessQueue = true;
+        myDropzoneTestim.processQueue();
+    }
+    myDropzoneTestim.on("queuecomplete", function(resp) {
+        myDropzoneTestim.options.autoProcessQueue = false;
+    });
+    myDropzoneTestim.on("success", function(file, responseText) {
+        location.reload();
+    });
+    $('.btnMediaUpload').on('click', function(){
+        var r = confirm("Upload selected items?");
+        if (r == true) {
+            TriggerDropzoneTestim();
+        }
+
+    });
+
+}

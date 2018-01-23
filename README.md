@@ -1,3 +1,7 @@
+# Demo
+
+Check out our [LIVE DEMO](http://futurehack.cherr.io/).
+
 # Installation guide
 
 ### Prerequisites:
@@ -20,7 +24,7 @@ Checkout **database** branch:
 ```bash
 git checkout https://github.com/CherrioPlatform/FutureHackaton.git
 ```
-Execute `databaseMPV.sql` to deploy all required tables. Tables are already populated with demo data.
+Execute `databaseMVP.sql` to deploy all required tables. Tables are already populated with demo data.
 
 ## Platform
 
@@ -55,5 +59,5 @@ All smart contracts should be deployed on Rinkeby Ethereum testnet (Solidity v.0
 ```bash
 git checkout https://github.com/CherrioPlatform/FutureHackaton.git
 ```
-- Deploy campaignToken.sol using environment of your choice (e.g. Online Solidity Browser version 0.4.20 commit)
+- Deploy `campaignToken.sol` using environment of your choice (e.g. Online Solidity Browser version 0.4.20 commit)
 - Check on Etherscan.io for smart contract's address.

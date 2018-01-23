@@ -28,20 +28,22 @@ define('CONST_BASE_URL', (!empty($_SERVER['HTTPS']) ? 'https' : 'http').'://' . 
 define('CONST_BASE_URL_CMS', (!empty($_SERVER['HTTPS']) ? 'https' : 'http').'://' . $_SERVER['HTTP_HOST'] . '/'.$cms_folder);
 define('CONST_IMG_THUMB_URL', CONST_BASE_URL_CMS."img/upload/thumb/");
 define('CONST_IMG_URL',CONST_BASE_URL_CMS."img/upload/");
+define('CONST_MEDIA_UPLOAD_URL',CONST_RELATIVE_PATH."mvp_cms/campaigns/");
 
 // Email SMTP config constants
-define('SMTP_PASSWORD', 'Cherrio,.');
-define('SMTP_USERNAME', 'futurehack@cherr.io');
-define('SMTP_HOST', 'mail.cherr.io');
+define('SMTP_PASSWORD', '');
+define('SMTP_USERNAME', '');
+define('SMTP_HOST', '');
 define('SMTP_PORT', '465');
 define('EMAIL_SENDER', 'futurehack@cherr.io');
 define('EMAIL_TITLE', 'CHERR.IO');
 define('EMAIL_SUBJECT', '');
 
 // Twitter and FB tokens
-define('TWITTER_CONSUMER_KEY', "YOUR_KEY");
-define('TWITTER_CONSUMER_SECRET', "YOUR_SECRET");
-define('FACEBOOK_ID', "YOUR_FB_ID");
+define('TWITTER_CONSUMER_KEY', "");
+define('TWITTER_CONSUMER_SECRET', "");
+define('FACEBOOK_ID', "");
+
 
 // Blockchain config
 define('ETH_TESTNET', TRUE);

@@ -121,8 +121,11 @@ class Campaign extends MX_Controller {
                   }
                   else{
                       $data['page_name'] = "home";
-
-                      $data['campaign'] = json_decode($this->campaign_model->campaign_by_niceurl());
+                      $type = 1;
+                      if(null !== $this->uri->segment(0) && $this->uri->segment(0) == "past-campaigns"){
+                          $type = 10;
+                      }
+                      $data['campaign'] = json_decode($this->campaign_model->campaign_by_niceurl($nice_url = false, $campaign_type_nice_url = false,  $order = 'page_content.datetime', $asc_desc = "DESC", $type));
 
                       if(empty($data['campaign'])){
                           header('Location: '.base_urll());
@@ -135,10 +138,8 @@ class Campaign extends MX_Controller {
                       $data['main_content'] = 'view_campaign_grid';
                       $this->load->view('includes/template',$data);
                   }
-
               }
     }
-
     public function past_campaign()
     {
         $data['page_name'] = "home";
@@ -155,8 +156,13 @@ class Campaign extends MX_Controller {
             $data['main_content'] = 'view_campaign_grid';
 
         }
-
         $this->load->view('includes/template',$data);
+    }
+
+    // Upload Campaign Proof image
+    public function upload_image()
+    {
+        $this->campaign_model->MediaUpload();
     }
 
 }

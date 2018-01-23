@@ -9,10 +9,10 @@ class Login_model extends CI_Model
         $this -> db -> where('email', $email);
         $this -> db -> where('password', MD5($password));
         $array_where = array(
-            "level =" => 1,
             "active" => 1,
             "status_id" => 1
         );
+        $this -> db -> where("(level = 1 OR level = 7)");
         $this -> db -> where($array_where);
         $this -> db -> limit(1);
 

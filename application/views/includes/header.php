@@ -37,6 +37,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/font-cherrio.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/style.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/responsive.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/dropzone.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/my_css.css">
 
 </head>
