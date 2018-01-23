@@ -16,4 +16,14 @@ class Page_modules extends MX_Controller {
     {
         $this->load->view('view_footer');
     }
+    public function dashboard_menu()
+    {
+        $this->load->view('view_dashboard_menu');
+    }
+    public function how_to_donate()
+    {
+        $data['main_content'] = 'view_how_to_donate';
+        $this->load->view('includes/template',$data);
+    }
+    
 }

@@ -38,9 +38,10 @@ define('EMAIL_SENDER', 'futurehack@cherr.io');
 define('EMAIL_TITLE', 'CHERR.IO');
 define('EMAIL_SUBJECT', '');
 
-// Twitter tokens
+// Twitter and FB tokens
 define('TWITTER_CONSUMER_KEY', "UUixdAqu351XWLlLjiOFYbEAf");
 define('TWITTER_CONSUMER_SECRET', "YV20fuglBw9jLv8UBmhsrS9pBYCj6lbcgPiw53CHtqzkJrgxil");
+define('FACEBOOK_ID', "888834174613208");
 
 // Blockchain config
 define('ETH_TESTNET', TRUE);

@@ -163,4 +163,48 @@ jQuery(document).ready(function($) {
                 })
         });
     };
+
+    // Menu Mobile
+    var toggles = document.querySelectorAll(".c-hamburger");
+    for (var i = toggles.length - 1; i >= 0; i--) {
+        var toggle = toggles[i];
+        toggleHandler(toggle);
+    }
+    ;
+    function toggleHandler(toggle) {
+        toggle.addEventListener("click", function (e) {
+            e.preventDefault();
+            (this.classList.contains("is-active") === true) ? this.classList.remove("is-active") : this.classList.add("is-active");
+        });
+    }
+    $('.c-hamburger').on('click', function () {
+        $(this).parents('.main-menu').toggleClass('open');
+        $('body').toggleClass('menu-open');
+    });
+    $('html').on('click', function (e) {
+        if ($(e.target).closest('.main-menu.open').length == 0) {
+            $('.main-menu').removeClass('open');
+            $('body').removeClass('menu-open');
+            $('.c-hamburger').removeClass('is-active');
+        }
+    });
+    // Readmore
+    $('#readmore').readmore({
+        moreLink: '<a href="#">' + label_read_full_story + '</a>',
+        lessLink: '<a href="#">' + label_close_full_story + '</a>',
+        collapsedHeight: 345,
+        afterToggle: function (trigger, element, expanded) {
+            if (!expanded) { // The "Close" link was clicked
+                $('html, body').animate({scrollTop: element.offset().top}, {duration: 100});
+            }
+        }
+    });
+
+    // How to donate
+    $('.faq-desc').hide();
+    $('.list-faq li a').on('click', function (e) {
+        e.preventDefault();
+        $('.list-faq li a').not(this).next().slideUp().parent().removeClass('open');
+        $(this).next().slideToggle().parent().addClass('open');
+    });
 });

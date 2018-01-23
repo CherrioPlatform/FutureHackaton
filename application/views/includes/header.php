@@ -32,6 +32,7 @@
 
     <link rel="icon" href="<?php echo base_url(); ?>img/favicon.png" type="image/png" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="<?php echo base_url();?>js/jquery-3.2.1.js"></script>
 
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/font-cherrio.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/style.css" />
@@ -53,7 +54,7 @@
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
         js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_EN/sdk.js#xfbml=1&version=v2.7&appId=<?php echo $this->config->item('fb_app_id'); ?>";
+        js.src = "//connect.facebook.net/en_EN/sdk.js#xfbml=1&version=v2.7&appId=<?php echo FACEBOOK_ID; ?>";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
 

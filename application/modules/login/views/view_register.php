@@ -44,4 +44,3 @@
     </main>
 </div>
 <?php echo Modules::run('page_modules/footer'); ?>
-

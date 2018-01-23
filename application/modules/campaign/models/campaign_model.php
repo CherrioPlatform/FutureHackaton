@@ -156,4 +156,83 @@ class Campaign_model extends CI_Model {
         //   var_dump($this->db->last_query());
         return json_encode($query -> result());
     }
+    public function save_proof_of_charity($user_id, $campaign_id)
+    {
+        if(!$this->check_ip_and_datetime($user_id,$campaign_id)){
+            $data = array(
+                "user_id" => $user_id,
+                "page_content_id" => $campaign_id,
+                "click_from_ip" => REMOTE_ADDR_IP,
+                "url" => current_url(),
+                "request_method" => json_encode($_SERVER)
+            );
+            $this->db->set('datetime', 'NOW()', FALSE);
+            $this->db->set('datetime_utc', 'UTC_TIMESTAMP()', FALSE);
+
+            $this->db->insert('proof_of_charity', $data);
+        }
+    }
+    public function check_ip_and_datetime($user_id, $page_content_id)
+    {
+        $this->db->select("proof_of_charity.id");
+        $this -> db -> from('proof_of_charity');
+        $array_where = array(
+            "proof_of_charity.click_from_ip" => REMOTE_ADDR_IP,
+            "proof_of_charity.user_id" => $user_id,
+            "proof_of_charity.page_content_id" => $page_content_id,
+        );
+
+        $this -> db -> where($array_where);
+        $this->db->where('DATE(datetime) = DATE(NOW())');
+
+        $query = $this -> db -> get();
+        //var_dump($this->db->last_query());
+        if($query -> num_rows() > 0){
+            return json_encode($query -> result());
+        }
+        else{
+            return false;
+        }
+
+    }
+    public function check_short_url($alias)
+    {
+        $this -> db -> select('page_content.id,page_content.title,page_content.sub_title,page_content.description, page_content.short_description, page_content.duration_datetime,page_content.location,page_content.short_description, page_content.goal, 
+        page_content.duration, page_content.eth_address, page_content.other_text4, page_content.nice_url, type.name AS type_name, page_content.alias,
+        type.nice_url AS type_nice_url, campaign_type.name AS campaign_type_name, campaign_type.nice_url AS campaign_type_nice_url, campaign_type.img AS campaign_icon, users.avatar_img, users.firstname AS organisation_firstname, 
+        users.lastname AS organisation_lastname, users.nice_url AS organisation_nice_url');
+        $this->db->select("DATE_FORMAT(page_content.datetime, '%d. %m. %Y') AS datetime", FALSE);
+        $this->db->join('page_content_views', 'page_content_views.page_content_id = page_content.id',"LEFT");
+        $this -> db -> from('page_content');
+
+        $array_where = array(
+            "page_content.alias" => $alias
+        );
+
+        $this->db->join('type', 'type.id = page_content.type_id',"LEFT");
+        $this->db->join('page_content_rating', 'page_content_rating.page_content_id = page_content.id',"LEFT");
+        $this->db->join('campaign_type', 'campaign_type.id = page_content.campaign_type_id', "LEFT");
+        $this->db->join('users', 'users.id = page_content.organisation_id');
+
+        $this -> db -> where($array_where);
+
+        $query = $this -> db -> get();
+
+        return json_encode($query -> result());
+
+    }
+    public function check_user_alias($alias)
+    {
+        $this->db->select("users.id, users.alias");
+        $this -> db -> from('users');
+        $array_where = array(
+            "users.alias" => $alias,
+        );
+
+        $this -> db -> where($array_where);
+
+        $query = $this -> db -> get();
+        //   var_dump($this->db->last_query());
+        return json_encode($query -> result());
+    }
 }

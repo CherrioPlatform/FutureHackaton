@@ -8,12 +8,56 @@ class Campaign extends MX_Controller {
         $this->lang->load('config', LANGUAGE);
         $this->load->model('campaign_model');
     }
+
+    public function web3()
+    {
+        $data['main_content'] = 'view_web3';
+        $this->load->view('includes/template',$data);
+    }
     public function index(){
         $data['page_name'] = "home";
         $data['campaign'] = json_decode($this->campaign_model->return_campaign(10));
 
         $data['main_content'] = 'view_main';
         $this->load->view('includes/template',$data);
+    }
+    public function r($param = null, $redirect = true)
+    {
+        if($param != null){
+            $campaign_alias = substr($param,0,5);
+            $user_alias = substr($param,5,10);
+            $item = json_decode($this->campaign_model->check_short_url($campaign_alias))[0];
+            $user = json_decode($this->campaign_model->check_user_alias($user_alias))[0];
+            if(!empty($item) && !empty($user)){
+                $user_session_id = -1;
+                if($this->session->userdata('logged_in_site'))
+                {
+                    $session_data = $this->session->userdata('logged_in_site');
+                    $user_session_id = $session_data['id'];
+                }
+                if($user_session_id != $user->id){
+                    if (!preg_match('/facebookexternalhit/',$_SERVER['HTTP_USER_AGENT']) && !preg_match('/Twitterbot/',$_SERVER['HTTP_USER_AGENT'])){
+                        if(isset($_SERVER['HTTP_REFERER'])){
+                            $this->campaign_model->save_proof_of_charity($user->id, $item->id);
+                        }
+                    }
+                }
+                
+                if($redirect){
+                    $url = base_urll().$item->type_nice_url.'/'.$item->campaign_type_nice_url.'/'.$item->nice_url."/".$item->alias.$user->alias;
+                    header('Location: '.$url);
+                    die();
+                }
+            }
+            else{
+                header('Location: '.base_urll());
+                die();
+            }
+        }
+        else{
+            header('Location: '.base_urll());
+            die();
+        }
     }
     public function campaigns($param1 = null, $param2 = null, $param3 = null)
     {
@@ -37,7 +81,7 @@ class Campaign extends MX_Controller {
                   if($this->session->userdata('logged_in_site'))
                   {
                       $session_data = $this->session->userdata('logged_in_site');
-                      $data['user_data'] = json_decode($this->campaign_model->GetUserData($session_data['id']))[0];
+                      $data['user_data'] = json_decode($this->campaign_model->user_data($session_data['id']))[0];
                       $data['logged_in'] = true;
                       if($param3 == null){
                           $url = base_urll().$data['item']->type_nice_url.'/'.$data['item']->campaign_type_nice_url.'/'.$data['item']->nice_url."/".$data['item']->alias.$data['user_data']->alias;
