@@ -1,5 +1,23 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+if ( ! function_exists('send_email'))
+{
+    function send_email($email_message = null, $reciver_email = array(), $email_subject = EMAIL_SUBJECT)
+    {
+        $ci =& get_instance();
+        $email_content['email_message'] = $email_message;
+        $connect_data['smtp_password'] = SMTP_PASSWORD;
+        $connect_data['smtp_username'] = SMTP_USERNAME;
+        $connect_data['smtp_host'] = SMTP_HOST;
+        $connect_data['smtp_port'] = SMTP_PORT;
+        $connect_data['email_sender'] = EMAIL_SENDER;
+        $email_content['email_title'] = EMAIL_TITLE;
+        $email_content['email_subject'] = $email_subject;
+
+        $ci->load->library('my_phpmailer');
+        $ci->my_phpmailer->SendEmail($connect_data, $reciver_email, $email_content, true);
+    }
+}
 if ( ! function_exists('progress_procentage'))
 {
     function progress_procentage($goal, $raised) {

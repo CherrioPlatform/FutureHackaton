@@ -1,12 +1,8 @@
-<?
-    If(ETH_TESTNET){
-        ?>
-        <div class="site-notice">
-            <p>Network: <strong>RINKEBY ETH </strong> provided by <strong>Etherscan.io</strong>. This is a <strong>test</strong> network! Don't send real <strong>ETHs</strong>. Send only test <strong>ETHs</strong>.</p>
-        </div>
-        <?php
-    }
-?>
+<? if(ETH_TESTNET) { ?>
+    <div class="site-notice">
+        <p>Network: <strong>RINKEBY ETH </strong> provided by <strong>Etherscan.io</strong>. This is a <strong>test</strong> network! Don't send real <strong>ETHs</strong>. Send only test <strong>ETHs</strong>.</p>
+    </div>
+<?php } ?>
 <script>
     var label_read_full_story = "Read full story";
     var label_close_full_story = "Close full story";

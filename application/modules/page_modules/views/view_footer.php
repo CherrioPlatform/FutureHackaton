@@ -11,6 +11,11 @@
                             </a>
                         </li>
                         <li>
+                            <a class="medium-icon" target="_blank" href="https://medium.com/cherr-io">
+                                <i class="icon-social-medium"></i>
+                            </a>
+                        </li>
+                        <li>
                             <a target="_blank" href="<?=$this->config->item('facebook_url')?>">
                                 <i class="icon-social-facebook"></i>
                             </a>

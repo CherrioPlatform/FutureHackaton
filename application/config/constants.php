@@ -33,14 +33,18 @@ define('CONST_IMG_URL',CONST_BASE_URL_CMS."img/upload/");
 define('SMTP_PASSWORD', 'Cherrio,.');
 define('SMTP_USERNAME', 'futurehack@cherr.io');
 define('SMTP_HOST', 'mail.cherr.io');
-define('SMTP_PORT', '587');
+define('SMTP_PORT', '465');
 define('EMAIL_SENDER', 'futurehack@cherr.io');
-define('EMAIL_TITLE', '');
+define('EMAIL_TITLE', 'CHERR.IO');
 define('EMAIL_SUBJECT', '');
 
+// Twitter tokens
+define('TWITTER_CONSUMER_KEY', "UUixdAqu351XWLlLjiOFYbEAf");
+define('TWITTER_CONSUMER_SECRET', "YV20fuglBw9jLv8UBmhsrS9pBYCj6lbcgPiw53CHtqzkJrgxil");
 
 // Blockchain config
 define('ETH_TESTNET', TRUE);
+define('ETH_CHR_CONVERSION', "5000");
 
 /*
 |--------------------------------------------------------------------------

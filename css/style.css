@@ -431,7 +431,7 @@ ul.socials-top li:hover i {
 .site-header .search-icon,
 .site-header .main-menu {
 	display: inline-block;
-	margin-left: 45px;
+	margin-left: 15px;
 	line-height: 60px;
 }
 
@@ -871,6 +871,9 @@ ul.socials-top li:hover i {
 	height: 35px;
 	border-radius: 50%;
 	display: inline-block;
+	-webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.37);
+	-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.37);
+	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.37);
 }
 
 .campaign-box .campaign-author {
