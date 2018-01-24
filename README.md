@@ -1,10 +1,15 @@
-# Vision & Roadmap
+# Vision, Goals & Roadmap
 
-Read our [Vision & Roadmap](https://github.com/CherrioPlatform/FutureHackaton/wiki/Vision-&-Roadmap).
+Read our [Vision, Goals & Roadmap](https://github.com/CherrioPlatform/FutureHackaton/wiki/Vision,-Goals-&-Roadmap).
 
 # Demo
 
 Check out our [LIVE DEMO](http://futurehack.cherr.io/).
+
+
+# Instructions to test the platform
+
+Read our [instructions](https://github.com/CherrioPlatform/FutureHackaton/wiki/Donation-process) step by step.
 
 # Installation guide
 
@@ -75,7 +80,7 @@ All smart contracts should be deployed on Rinkeby Ethereum Network (Solidity v.0
 ```bash
 git checkout https://github.com/CherrioPlatform/FutureHackaton.git
 ```
-- Deploy `campaignToken.sol` using environment of your choice (e.g. Online Solidity Browser version 0.4.20 commit)
+- Deploy `campaignMVPToken.sol` using environment of your choice (e.g. Online Solidity Browser version 0.4.20 commit)
 - Check on Etherscan.io for smart contract's address.
 
 ### Usage:
