@@ -1,3 +1,5 @@
+## Please read our [WIKI](https://github.com/CherrioPlatform/FutureHackaton/wiki) before installation!!!
+
 # Installation guide
 
 ### Prerequisites:
