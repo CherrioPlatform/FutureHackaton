@@ -9,7 +9,7 @@
                 <hr>
             </div>
         </div>
-        <div class="faq-content">
+        <div class="faq-content flat-map">
             <div class="container">
                 <div class="faq-section">
                     <div class="border-title">
@@ -100,7 +100,13 @@
                         <li>
                             <span class="ion-plus"></span><a href="#">When a campaign is finished, what do organizations need to in order to receive the funds?</a>
                             <div class="faq-desc">
-                                <p>Organizations will receive funds in their Ethereum wallet. We can also help with the transfer to fiat currency.</p>
+                                <p>Organizations will receive funds in their Ethereum wallet. They also need to provide real documents that are proving how they spent funds. Afterwards, documents will be validated by our community and organization will get the rating score.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="ion-plus"></span><a href="#">What means organization rating and how this will affect donation process?</a>
+                            <div class="faq-desc">
+                                <p>If organization's previous campaigns were rated as positive, organization will always receive total funds as soon as campaign is finished. Otherwise funds will be released through milestones.</p>
                             </div>
                         </li>
                     </ul>

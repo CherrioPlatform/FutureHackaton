@@ -7,7 +7,7 @@ class Campaign_model extends CI_Model {
         page_content.short_description,page_content.short_description, page_content.goal, page_content.duration, page_content.eth_address, 
         page_content.other_text4, page_content.nice_url, type.name AS type_name, page_content.alias, type.nice_url AS type_nice_url, 
         campaign_type.name AS campaign_type_name, page_content.status_id AS page_status, campaign_type.nice_url AS campaign_type_nice_url,
-        campaign_type.img AS campaign_icon, users.avatar_img, users.firstname AS organisation_firstname, users.lastname AS organisation_lastname, 
+        campaign_type.img AS campaign_icon, users.avatar_img, users.firstname AS organisation_firstname, users.email, users.lastname AS organisation_lastname, 
         users.nice_url AS organisation_nice_url');
 
         $this->db->select("DATE_FORMAT(page_content.datetime, '%d. %m. %Y') AS datetime", FALSE);
@@ -50,10 +50,11 @@ class Campaign_model extends CI_Model {
     }
     public function campaign_by_niceurl($nice_url = false, $campaign_type_nice_url = false, $order = 'page_content.datetime', $asc_desc = "DESC", $status_id = 1)
     {
-        $this -> db -> select('page_content.id,page_content.title,page_content.sub_title,page_content.description, page_content.duration_datetime, page_content.short_description,page_content.location,page_content.short_description, page_content.goal, 
-        page_content.duration, page_content.eth_address, page_content.other_text4, page_content.nice_url, type.name AS type_name, page_content.alias,
-        type.nice_url AS type_nice_url, campaign_type.name AS campaign_type_name, campaign_type.nice_url AS campaign_type_nice_url, campaign_type.img AS campaign_icon, users.id AS organisation_id, users.avatar_img, users.firstname AS organisation_firstname, 
-        users.lastname AS organisation_lastname, users.nice_url AS organisation_nice_url, page_content.status_id AS page_status, page_content.proof_image');
+        $this -> db -> select('page_content.id,page_content.title,page_content.sub_title,page_content.description, page_content.duration_datetime, page_content.short_description,
+        page_content.location,page_content.short_description, page_content.goal, page_content.duration, page_content.eth_address, page_content.other_text4, page_content.nice_url, 
+        type.name AS type_name, page_content.alias, type.nice_url AS type_nice_url, campaign_type.name AS campaign_type_name, campaign_type.nice_url AS campaign_type_nice_url, 
+        campaign_type.img AS campaign_icon, users.id AS organisation_id, users.avatar_img, users.firstname AS organisation_firstname, users.lastname AS organisation_lastname, 
+        users.email, users.nice_url AS organisation_nice_url, page_content.status_id AS page_status, page_content.proof_image');
         $this->db->select("DATE_FORMAT(page_content.datetime, '%d. %m. %Y') AS datetime", FALSE);
         $this->db->join('page_content_views', 'page_content_views.page_content_id = page_content.id',"LEFT");
         $this -> db -> from('page_content');
@@ -197,10 +198,11 @@ class Campaign_model extends CI_Model {
     }
     public function check_short_url($alias)
     {
-        $this -> db -> select('page_content.id,page_content.title,page_content.sub_title,page_content.description, page_content.short_description, page_content.duration_datetime,page_content.location,page_content.short_description, page_content.goal, 
-        page_content.duration, page_content.eth_address, page_content.other_text4, page_content.nice_url, type.name AS type_name, page_content.alias,
-        type.nice_url AS type_nice_url, campaign_type.name AS campaign_type_name, campaign_type.nice_url AS campaign_type_nice_url, campaign_type.img AS campaign_icon, users.avatar_img, users.firstname AS organisation_firstname, 
-        users.lastname AS organisation_lastname, users.nice_url AS organisation_nice_url');
+        $this -> db -> select('page_content.id,page_content.title,page_content.sub_title,page_content.description, page_content.short_description, 
+        page_content.duration_datetime,page_content.location,page_content.short_description, page_content.goal, page_content.duration, 
+        page_content.eth_address, page_content.other_text4, page_content.nice_url, type.name AS type_name, page_content.alias, type.nice_url AS type_nice_url, 
+        campaign_type.name AS campaign_type_name, campaign_type.nice_url AS campaign_type_nice_url, campaign_type.img AS campaign_icon, 
+        users.avatar_img, users.firstname AS organisation_firstname, users.email, users.lastname AS organisation_lastname, users.nice_url AS organisation_nice_url');
         $this->db->select("DATE_FORMAT(page_content.datetime, '%d. %m. %Y') AS datetime", FALSE);
         $this->db->join('page_content_views', 'page_content_views.page_content_id = page_content.id',"LEFT");
         $this -> db -> from('page_content');

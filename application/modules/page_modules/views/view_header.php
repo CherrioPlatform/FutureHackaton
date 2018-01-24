@@ -12,11 +12,17 @@ $record_num_prelast = $this->uri->segment($last-1);
             <nav class="main-menu">
                 <button class="c-hamburger c-hamburger--htx"><span></span></button>
                 <ul>
+                    <li class="<?php echo ($record_num_prelast == "campaigns") ? "active" : ""?>">
+                        <a href="<?=base_urll()?>campaigns">Campaigns</a>
+                    </li>
                     <li class="<?php echo ($record_num_prelast == "past-campaigns") ? "active" : ""?>">
                         <a href="<?=base_urll()?>past-campaigns">Past Campaigns</a>
                     </li>
                     <li class="<?php echo ($record_num_prelast == "how-to-donate") ? "active" : ""?>">
                         <a href="<?=base_urll()?>how-to-donate">How to donate</a>
+                    </li>
+                    <li class="<?php echo ($record_num_prelast == "emergency-pool") ? "active" : ""?>">
+                        <a href="<?=base_urll()?>emergency-pool">Emergency pool</a>
                     </li>
                     <li>
                         <a href="https://cherr.io">About CHERR.IO</a>

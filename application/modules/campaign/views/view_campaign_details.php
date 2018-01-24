@@ -52,7 +52,7 @@ if($raised >= $item->goal && $item->page_status == 1){
                         }
                         ?>
                         <div class="campaign-box">
-                            <a href="<?=$campaign_type_url?>" ><div class="campaign-icon-1" style="background-image: url(<?php echo CONST_IMG_URL.$item->campaign_icon;?>);"></div></a>
+                            <a href="<?=$campaign_type_url?>"><div class="campaign-icon-1" style="background-image: url(<?php echo CONST_IMG_URL.$item->campaign_icon;?>);"></div></a>
                             <a href="<?=base_urll().$item->type_nice_url.'/'.$item->campaign_type_nice_url?>" class="category"><?=$item->campaign_type_name?></a>
                             <h3><?=$item->sub_title;?></h3>
                             <div class="campaign-description"><p><?=$item->short_description;?></p></div>
@@ -68,7 +68,7 @@ if($raised >= $item->goal && $item->page_status == 1){
                                 <div class="process-info clearfix">
                                     <div class="process-funded"><span><?=$raised?> / <?=$item->goal?> ETH</span>Goal</div>
                                     <div class="process-time"><span><?=$donations?></span>Donations</div>
-                                    <div class="process-time" data-time="<?=$item->duration_datetime?>"><span><?=days_till($item->duration_datetime, false)?></span>Days left</div>
+                                    <div class="process-time" data-time="<?=$item->duration_datetime?>"><span><?=days_till($item->duration_datetime, false)?></span>End time</div>
                                 </div>
                             </div>
                             <div class="button">
@@ -86,10 +86,12 @@ if($raised >= $item->goal && $item->page_status == 1){
                                                         <h4 class="modal-title"><?=$item->title;?></h4>
                                                     </div>
                                                     <div class="modal-body" style="text-align: center">
-                                                        <p>Send ETH to this address: <br><br><b><span class="eth-address"><?=$item->eth_address?></span></b></p>
+                                                        <p>Send ETH to this address: <br><br><b><span class="unique-eth-address eth-address"><?=trim($item->eth_address)?></span></b></p>
                                                         <p>
-                                                            <img src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=<?=$item->eth_address?>&choe=UTF-8" title="<?=$item->eth_address?>" />
+                                                            <img src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=<?=trim($item->eth_address)?>&choe=UTF-8" title="<?=trim($item->eth_address)?>" />
                                                         </p>
+                                                        <p class="color-red">I agree that my donation can be transfered to <a href="<?=base_urll()?>emergency-pool" target="_blank">Emergency pool</a> in case of false proof of spent funds.</p>
+                                                        <br>
                                                         <div class="text-center"><a href="<?=base_urll()?>how-to-donate" style="text-decoration: underline">How can I donate?</a></div>
                                                     </div>
                                                     <div class="modal-footer">
@@ -139,7 +141,7 @@ if($raised >= $item->goal && $item->page_status == 1){
                                                            <h4 class="modal-title"><?=$item->title;?></h4>
                                                        </div>
                                                        <div class="modal-body" style="text-align: center; padding: 50px 0">
-                                                           <p>Upload documents:</p>
+                                                           <p>Upload documents (.jpg, .png, .jpeg):</p>
                                                            <br><br>
 
                                                            <input type="hidden" name="campaign_id"  id="campaign_id" value="<?=$item->id?>"/>
@@ -150,7 +152,7 @@ if($raised >= $item->goal && $item->page_status == 1){
                                                                </div>
                                                            </form>
 
-                                                           <button type="button" class="btn btn-default btnMediaUpload">Upload</button>
+                                                           <button type="button" class="btn btn-default btnMediaUpload btn-dark">Upload</button>
                                                        </div>
                                                        <div class="modal-footer">
                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -171,13 +173,11 @@ if($raised >= $item->goal && $item->page_status == 1){
                                             </div>
                                             <?php
                                                 if(isset($user_data) && $user_data->user_id != $item->organisation_id){
+
                                                     ?>
-                                                    <div class="vote-docs">
-                                                        <p><strong>VOTE DOCUMENTS</strong></p>
-                                                        <br>
-                                                        <a href="#" class="btn-primary btn-good-bad"><i class="good-icon"></i> Good</a>
-                                                        <a href="#" class="btn-primary btn-good-bad"><i class="bad-icon"></i> Bad</a>
-                                                    </div>
+                                                    <input type="hidden" id="campaign_address" value="<?=trim($item->eth_address)?>"/>
+
+                                                    <div class="vote-docs"></div>
                                                     <?php
                                                 }
                                             ?>

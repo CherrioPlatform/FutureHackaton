@@ -6,6 +6,18 @@ Check out our [LIVE DEMO](http://futurehack.cherr.io/).
 
 ### Prerequisites:
 
+Install local environment with Apache server and MySQL database using this tutorial: 
+
+https://netbeans.org/kb/docs/php/configure-php-environment-windows.htm (Windows)
+
+or
+
+https://www.ntu.edu.sg/home/ehchua/programming/webprogramming/AMP_Setup.html (Linux)
+
+Get `git` client from:
+
+https://git-scm.com/downloads
+
 Install `git` client and clone FutureHackaton repository:
 
 ```bash

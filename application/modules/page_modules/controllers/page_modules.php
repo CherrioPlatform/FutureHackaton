@@ -25,5 +25,10 @@ class Page_modules extends MX_Controller {
         $data['main_content'] = 'view_how_to_donate';
         $this->load->view('includes/template',$data);
     }
+    public function emergency_pool()
+    {
+        $data['main_content'] = 'view_emergency_pool';
+        $this->load->view('includes/template',$data);
+    }
     
 }

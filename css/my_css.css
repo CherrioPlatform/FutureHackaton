@@ -1,4 +1,4 @@
-.btn-finished{
+.btn-finished, .addVote{
     color: white !important;
 }
 .btn-finished:hover{

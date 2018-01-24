@@ -1,5 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+// send emails via PHPmailer
 if ( ! function_exists('send_email'))
 {
     function send_email($email_message = null, $reciver_email = array(), $email_subject = EMAIL_SUBJECT)
@@ -18,6 +19,7 @@ if ( ! function_exists('send_email'))
         $ci->my_phpmailer->SendEmail($connect_data, $reciver_email, $email_content, true);
     }
 }
+// calculate campaign donation progress
 if ( ! function_exists('progress_procentage'))
 {
     function progress_procentage($goal, $raised) {
@@ -28,6 +30,7 @@ if ( ! function_exists('progress_procentage'))
     }
 }
 
+// get user session data
 if ( ! function_exists('get_session_data'))
 {
     function get_session_data($session_name = 'logged_in_site'){
@@ -40,7 +43,7 @@ if ( ! function_exists('get_session_data'))
         return NULL;
     }
 }
-
+// truncate short description if there is too many letters
 if ( ! function_exists('truncate'))
 {
     function truncate($str, $len) {
@@ -50,13 +53,20 @@ if ( ! function_exists('truncate'))
         return $trunk;
     }
 }
-
+// return base url with language segment in url
 if ( ! function_exists('base_urll'))
 {
     function base_urll() {
         return base_url().LANGUAGE."/";
     }
 }
+/**
+ *
+ * BLOCKCHAIN FUNCTIONS
+ *
+ */
+
+// convert from wei to ETH
 if ( ! function_exists('wei2eth'))
 {
     function wei2eth($wei)
@@ -65,11 +75,11 @@ if ( ! function_exists('wei2eth'))
     }
 }
 
-if ( ! function_exists('get_balance'))
+// return emergency pool balance
+if ( ! function_exists('get_pool_balance'))
 {
-    function get_balance($address)
+    function get_pool_balance($address)
     {
-
         if(!empty($address))
         {
             if(!ETH_TESTNET)
@@ -83,10 +93,42 @@ if ( ! function_exists('get_balance'))
 
             return wei2eth($data->result);
         }
+    }
+
+}
+// return balance of campaign donations
+if ( ! function_exists('get_balance'))
+{
+    function get_balance($address)
+    {
+        if(!empty($address))
+        {
+            if(!ETH_TESTNET)
+                $urlTransactions = "http://api.etherscan.io/api?module=account&action=txlist&startblock=0&endblock=99999999&sort=desc&apikey=E311MMGX3D8VJZTNGFK3F5I4NGUDMX2CPX";
+            else
+                $urlTransactions = "http://rinkeby.etherscan.io/api?module=account&action=txlist&startblock=0&endblock=99999999&sort=desc&apikey=E311MMGX3D8VJZTNGFK3F5I4NGUDMX2CPX";
+
+            $url = $urlTransactions.'&address='.$address;
+
+            $data = json_decode(file_get_contents($url));
+
+            $count = 0;
+
+            foreach ($data->result as $transaction)
+            {
+                if($transaction->txreceipt_status == 1){
+                    if(strtoupper($transaction->to) == strtoupper($address))
+                    {
+                        $count += $transaction->value;
+                    }
+                }
+            }
+            return wei2eth($count);
+        }
         return false;
     }
 }
-
+// get number so donations
 if ( ! function_exists('get_number_of_donators'))
 {
     function get_number_of_donators($address)
@@ -106,16 +148,19 @@ if ( ! function_exists('get_number_of_donators'))
 
             foreach ($data->result as $transaction)
             {
-                if(strtoupper($transaction->to) == strtoupper($address))
-                {
-                    $count++;
+                if($transaction->txreceipt_status == 1){
+                    if(strtoupper($transaction->to) == strtoupper($address))
+                    {
+                        $count++;
+                    }
                 }
+
             }
             return $count;
         }
     }
 }
-
+// get all successful donations
 if ( ! function_exists('get_transactions'))
 {
     function get_transactions($to, $from = false)
@@ -135,21 +180,24 @@ if ( ! function_exists('get_transactions'))
 
             foreach ($data->result as $transaction)
             {
-                $transaction->value = wei2eth($transaction->value);
+                if($transaction->txreceipt_status == 1){
+                    $transaction->value = wei2eth($transaction->value);
 
-                if($from)
-                {
-                    if (strtoupper($transaction->to) == strtoupper($to) && strtoupper($transaction->from) == strtoupper($from)) {
-                        $transactions[] = $transaction;
-                    }
-                }
-                else
-                {
-                    if (strtoupper($transaction->to) == strtoupper($to))
+                    if($from)
                     {
-                        $transactions[] = $transaction;
+                        if (strtoupper($transaction->to) == strtoupper($to) && strtoupper($transaction->from) == strtoupper($from)) {
+                            $transactions[] = $transaction;
+                        }
+                    }
+                    else
+                    {
+                        if (strtoupper($transaction->to) == strtoupper($to))
+                        {
+                            $transactions[] = $transaction;
+                        }
                     }
                 }
+
             }
             return $transactions;
 
@@ -158,6 +206,8 @@ if ( ! function_exists('get_transactions'))
         return false;
     }
 }
+
+// check if is correct ethereum address
 if ( ! function_exists('is_address'))
 {
     function is_address($address) {
@@ -191,7 +241,13 @@ if ( ! function_exists('is_checksumAddress'))
         return true;
     }
 }
+/**
+ *
+ * END BLOCKCHAIN FUNCTIONS
+ *
+ */
 
+// return days till campaign is finished
 if ( ! function_exists('days_till'))
 {
     function days_till($date, $finishedDate = true)

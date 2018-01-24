@@ -16,9 +16,11 @@
 <script type="text/javascript" src="<?php echo base_url();?>libs/bxslider/jquery.bxslider.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>libs/readmore/readmore.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>libs/dropzone.js"></script>
-<script  type="text/javascript" src="<?php echo base_url();?>js/main.js"></script>
 <script  type="text/javascript" src="<?php echo base_url();?>js/web3/web3.min.js"></script>
+<script  type="text/javascript" src="<?php echo base_url();?>libs/particles/particles.min.js"></script>
 <script  type="text/javascript" src="<?php echo base_url();?>js/web3.js"></script>
+<script  type="text/javascript" src="<?php echo base_url();?>js/main.js"></script>
+
 
 </body>
 </html>

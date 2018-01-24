@@ -21,6 +21,7 @@ class Campaign extends MX_Controller {
         $data['main_content'] = 'view_main';
         $this->load->view('includes/template',$data);
     }
+    // Proof of Charity tracking
     public function r($param = null, $redirect = true)
     {
         if($param != null){
@@ -59,6 +60,7 @@ class Campaign extends MX_Controller {
             die();
         }
     }
+    // list campaigns grid view (active, past, by type) or campaign details
     public function campaigns($param1 = null, $param2 = null, $param3 = null)
     {
            if($param3 != null){
