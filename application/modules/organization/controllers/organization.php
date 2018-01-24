@@ -10,6 +10,9 @@ class Organization extends MX_Controller
         $this->load->model('organization_model');
     }
 
+    /*
+     * Get and load view with organization's details
+     * */
     public function index($param = null)
     {
         if($param != null){

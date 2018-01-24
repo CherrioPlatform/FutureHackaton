@@ -2,6 +2,10 @@
 
 class Login_model extends CI_Model
 {
+
+    /*
+     * Return user's data on login
+     * */
     function login($email, $password)
     {
         $this -> db -> select('id, password, email,level, firstname, lastname, nice_url');
@@ -27,10 +31,18 @@ class Login_model extends CI_Model
             return false;
         }
     }
+
+    /*
+     * Generate user's alias (random)
+     * */
     public function get_random_text($length = 5) {
         $alias = substr(str_shuffle('AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890'), 0, $length);
         return $this->CheckUserAlias($alias);
     }
+
+    /*
+     * Check if user's alias already exist
+     * */
     public function CheckUserAlias($alias)
     {
         $this -> db -> select('alias');
@@ -55,6 +67,9 @@ class Login_model extends CI_Model
         }
     }
 
+    /*
+     * Update user's password
+     * */
     public function update_password($password, $email, $hash)
     {
         $data = array(
@@ -66,6 +81,10 @@ class Login_model extends CI_Model
         return true;
 
     }
+
+    /*
+     * Check if forgotten password hash is correct
+     * */
     public function check_hash($hash)
     {
         $this -> db -> select('id, email');
@@ -88,6 +107,10 @@ class Login_model extends CI_Model
             return false;
         }
     }
+
+    /*
+     * Check if user's registeration confirmation link has correct hash
+     * */
     public function check_hash_registration($hash)
     {
         $this -> db -> select('id, email');
@@ -110,6 +133,10 @@ class Login_model extends CI_Model
             return false;
         }
     }
+
+    /*
+     * Set hash's status to approved (registration)
+     * */
     public function update_hash_register_status($hash)
     {
         $data = array(
@@ -120,6 +147,10 @@ class Login_model extends CI_Model
         $this->db->update('users', $data);
         return true;
     }
+
+    /*
+     * Set hash's status to approved (forgotten password)
+     * */
     public function update_hash_status($hash)
     {
         $data = array(
@@ -130,6 +161,10 @@ class Login_model extends CI_Model
         $this->db->update('users_forgot_password', $data);
         return true;
     }
+
+    /*
+     * Save new users at registration
+     * */
     public function save_registration($data)
     {
         if(!$this->check_email_exist($data['email'])){
@@ -144,6 +179,10 @@ class Login_model extends CI_Model
         }
         return false;
     }
+
+    /*
+     * Save forgotten password hash
+     * */
     public function save_forgot_password_hash($data)
     {
         $email = $data['email'];
@@ -157,6 +196,10 @@ class Login_model extends CI_Model
             return false;
         }
     }
+
+    /*
+     * Check if user's email exists
+     * */
     public function check_email_exist($email, $id = null){
         $this -> db -> select('id');
         $this -> db -> from('users');

@@ -8,6 +8,10 @@ class Login extends MX_Controller {
         $this->lang->load('config', LANGUAGE);
         $this->load->model('login_model');
     }
+
+    /*
+     * Redirect to main page if user is logged in or load login page for unathorised users
+     * */
     function index()
     {
         if($this->session->userdata('logged_in_site'))
@@ -22,6 +26,10 @@ class Login extends MX_Controller {
         $data['main_content'] = 'view_login';
         $this->load->view('includes/template',$data);
     }
+
+    /*
+     * Redirect to main page if user is logged in or load register page for unathorised users
+     * */
     public function register()
     {
         if($this->session->userdata('logged_in_site'))
@@ -35,6 +43,10 @@ class Login extends MX_Controller {
         $data['main_content'] = 'view_register';
         $this->load->view('includes/template',$data);
     }
+
+    /*
+     * Authorize and check user's login data
+     * */
     public function login_form()
     {
         if(!$this->session->userdata('logged_in_site'))
@@ -101,6 +113,10 @@ class Login extends MX_Controller {
 
         }
     }
+
+    /*
+     * Save registration in database
+     * */
     public function save_registration()
     {
         $data = array();
@@ -166,6 +182,10 @@ class Login extends MX_Controller {
             exit(json_encode($response));
         }
     }
+
+    /*
+     * Confirm registration via hash that has been sent on email
+     * */
     public function confirm_registration($hash = null)
     {
         if($hash == null){
@@ -186,6 +206,10 @@ class Login extends MX_Controller {
             }
         }
     }
+
+    /*
+     * Forgotten password page. If hash is incorrect or expired, redirect user to homepage
+     * */
     public function forgot_password($hash = null)
     {
         if($hash == null){
@@ -205,6 +229,10 @@ class Login extends MX_Controller {
             }
         }
     }
+
+    /*
+     * Save new password
+     * */
     public function update_password()
     {
         $data = array();
@@ -264,6 +292,9 @@ class Login extends MX_Controller {
         }
     }
 
+    /*
+     * Logout usser - unset session
+     * */
     function logout()
     {
         $this->session->unset_userdata('logged_in_site');
@@ -319,6 +350,9 @@ class Login extends MX_Controller {
         }
     }
 
+    /*
+     * Send email to newly registered users
+     * */
     public function send_email_new_user($email, $hash, $name)
     {
         $email_content = "Dear {name}, <br>";
@@ -340,21 +374,21 @@ class Login extends MX_Controller {
 
         send_email($email_message, $reciver_email,"CHERR.IO - Confirm your registration");
     }
-    public function send_email($email, $hash)
-    {
 
+    /*
+     * Send email for password reset
+     * */
+    public function send_email($email, $hash) {
         $email_content = "You requested to reset your password.<br><br>Click here to reset password: ".base_urll()."forgot-password/".$hash;
         $email_content .= "<br><br>CHERR.IO Team<br>";
 
         $reciver_email = array(
             $email
         );
-        $find = array(
-        );
 
-        $replace = array(
+        $find = array();
+        $replace = array();
 
-        );
         $email_message = str_replace($find, $replace, $email_content);
 
         send_email($email_message, $reciver_email,"CHERR.IO - Reset password");

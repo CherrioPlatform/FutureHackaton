@@ -30,7 +30,8 @@
     }
     ?>
 
-    <link rel="icon" href="<?php echo base_url(); ?>img/favicon.png" type="image/png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo base_url(); ?>img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url(); ?>img/favicon-16x16.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="<?php echo base_url();?>js/jquery-3.2.1.js"></script>
 

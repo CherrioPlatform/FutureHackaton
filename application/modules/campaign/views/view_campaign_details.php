@@ -87,6 +87,7 @@ if($raised >= $item->goal && $item->page_status == 1){
                                                     </div>
                                                     <div class="modal-body" style="text-align: center">
                                                         <p>Send ETH to this address: <br><br><b><span class="unique-eth-address eth-address"><?=trim($item->eth_address)?></span></b></p>
+                                                        <p class="color-red">Min. GAS limit: 100.000</p>
                                                         <p>
                                                             <img src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=<?=trim($item->eth_address)?>&choe=UTF-8" title="<?=trim($item->eth_address)?>" />
                                                         </p>
@@ -182,7 +183,16 @@ if($raised >= $item->goal && $item->page_status == 1){
                                                 }
                                             ?>
                                             <?php
+                                            if(!$this->session->userdata('logged_in_site'))
+                                            {
+                                                ?>
+                                                <p>
+                                                    If you are a donor for this campaign you need to login for voting.
+                                                </p>
+                                                <?php
+                                            }
                                         }
+
                                     ?>
                                     <?php
                                 }

@@ -8,6 +8,11 @@ class Dashboard extends MX_Controller {
         $this->lang->load('config', LANGUAGE);
         $this->load->model('dashboard_model');
     }
+
+    /*
+     * Loading dashboard subpages based on url
+     * On main dashboard page we get Proof of Charity points
+     * */
     public function index($param = null){
         $data['page_name'] = "";
 
@@ -47,6 +52,10 @@ class Dashboard extends MX_Controller {
             die();
         }
     }
+
+    /*
+     * Get User's Backed Campaigns and calculate Proof of Charity points
+     * */
     public function user_donations()
     {
         switch ($_POST['type']){
@@ -72,20 +81,17 @@ class Dashboard extends MX_Controller {
         }
 
     }
+
+    /*
+     * Populate table User's Backed Campaigns page
+     * */
     public function campaign_tables()
     {
-        //var_dump($_POST);
         if($this->session->userdata('logged_in_site'))
         {
             switch ($_POST['type']){
                 case "backed_campaigns":
                     $campaigns = json_decode($this->dashboard_model->get_campaigns());
-                    break;
-                case "active_campaigns":
-                    $campaigns = json_decode($this->dashboard_model->get_campaigns(1));
-                    break;
-                case "past_campaigns":
-                    $campaigns = json_decode($this->dashboard_model->get_campaigns(-1));
                     break;
             }
             if(empty($campaigns)){
@@ -101,6 +107,10 @@ class Dashboard extends MX_Controller {
             }
         }
     }
+
+    /*
+     * Populate table Proof of Chairty page
+     * */
     public function proof_of_charity_table()
     {
         if($this->session->userdata('logged_in_site'))
@@ -117,6 +127,12 @@ class Dashboard extends MX_Controller {
             $this->load->view('view_proof_of_charity_table',$data);
         }
     }
+
+    /*
+     * Get Twitter oAuth
+     * Get Twitter user details
+     * Get User's hashtags, follow
+     * */
     public function connect_with_twitter(){
         if($this->session->userdata('logged_in_site')) {
             $session_data = $this->session->userdata('logged_in_site');
@@ -153,7 +169,6 @@ class Dashboard extends MX_Controller {
                     $userInfo = $connection->get('account/verify_credentials');
 
                     //Preparing data for database insertion
-                    $name = explode(" ",$userInfo->name);
                     $userData = array(
                         'oauth_provider' => 'twitter',
                         'oauth_uid' => $userInfo->id,
@@ -246,6 +261,10 @@ class Dashboard extends MX_Controller {
 
         }
     }
+
+    /*
+     * Twitter Disconnect - kill the session
+     * */
     public function twitter_logout() {
         $this->session->unset_userdata('token');
         $this->session->unset_userdata('token_secret');

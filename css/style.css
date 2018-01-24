@@ -413,7 +413,7 @@ ul.socials-top li:hover i {
 
 .site-header .site-brand {
 	float: left;
-	max-width: 125px;
+	width: 125px;
 	padding-top: 6px;
 	padding-bottom: 15px;
 }
@@ -4993,6 +4993,11 @@ span.flag-icon img {
 	overflow: hidden;
 	margin: 0 auto;
 	background-color: #d21242;
+}
+
+.particles-js-canvas-el {
+	border-radius: 50%;
+	overflow: hidden;
 }
 
 @media(max-width: 767px) {

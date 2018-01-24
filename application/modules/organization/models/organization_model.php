@@ -1,6 +1,10 @@
 <?php
 
 class Organization_model extends CI_Model {
+
+    /*
+     * Return organizaiton's details
+     * */
     public function get_organisation($user_id, $nice_url = false)
     {
         $this->db->select("users.firstname, users.lastname,users.alias,users.email, users.eth_address, users.website, users.phone, users.mobile, users.city, users.post_number, users.country, users.address, users.about_us, users.avatar_img");

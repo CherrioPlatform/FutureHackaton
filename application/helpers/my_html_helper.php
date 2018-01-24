@@ -1,5 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+/*
+ * Generate small menu on Campaign details
+ * */
 if ( ! function_exists('page_small_menu'))
 {
     function page_small_menu($menu_type,$item) {
@@ -35,6 +38,10 @@ if ( ! function_exists('page_small_menu'))
         }
     }
 }
+
+/*
+ * Small campaign box info
+ * */
 if ( ! function_exists('campaign_box'))
 {
     // Load campaigns
@@ -116,23 +123,27 @@ if ( ! function_exists('campaign_box'))
             <?php
         }
     }
-    if ( ! function_exists('campaign_transactions'))
-    {
-        function campaign_transactions($eth, $address, $timestamp) {
+}
 
-            if(!ETH_TESTNET)
-                $etherscan_address = "https://etherscan.io/address/".$address;
-            else
-                $etherscan_address = "https://rinkeby.etherscan.io/address/".$address;
-            ?>
-            <div class="plan">
-                <a href="<?=$etherscan_address?>" target="_blank">
-                    <h4><?=round($eth,4)?> ETH</h4>
-                    <div class="plan-date"><?= days_till(date('Y-m-d H:i:s', $timestamp));?> ago</div>
-                    <div class="backer"><?=$address?></div>
-                </a>
-            </div>
-            <?php
-        }
+/*
+ * List of campaign donations
+ * */
+if ( ! function_exists('campaign_transactions'))
+{
+    function campaign_transactions($eth, $address, $timestamp) {
+
+        if(!ETH_TESTNET)
+            $etherscan_address = "https://etherscan.io/address/".$address;
+        else
+            $etherscan_address = "https://rinkeby.etherscan.io/address/".$address;
+        ?>
+        <div class="plan">
+            <a href="<?=$etherscan_address?>" target="_blank">
+                <h4><?=round($eth,4)?> ETH</h4>
+                <div class="plan-date"><?= days_till(date('Y-m-d H:i:s', $timestamp));?> ago</div>
+                <div class="backer"><?=$address?></div>
+            </a>
+        </div>
+        <?php
     }
 }

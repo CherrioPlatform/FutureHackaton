@@ -1,3 +1,4 @@
+// Inicialize web3 library
 if (typeof web3 !== 'undefined') {
     web3js = new Web3(web3.currentProvider);
 } else {
@@ -5,8 +6,10 @@ if (typeof web3 !== 'undefined') {
     web3js = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 }
 
-var owner = "";
+// Cherrio Smart Contract instance
+var cherrio = null;
 
+// ABI of smart contract
 cherrioContract = web3.eth.contract([
     {
         "constant": true,
@@ -43,6 +46,20 @@ cherrioContract = web3.eth.contract([
         ],
         "payable": false,
         "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "startDate",
+        "outputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
         "type": "function"
     },
     {
@@ -213,53 +230,6 @@ cherrioContract = web3.eth.contract([
         "type": "function"
     },
     {
-        "constant": true,
-        "inputs": [
-            {
-                "name": "_address",
-                "type": "address"
-            }
-        ],
-        "name": "getVoterVote",
-        "outputs": [
-            {
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [],
-        "name": "getCap",
-        "outputs": [
-            {
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "pure",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [],
-        "name": "getCanVote",
-        "outputs": [
-            {
-                "name": "",
-                "type": "bool"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
         "constant": false,
         "inputs": [
             {
@@ -378,62 +348,6 @@ cherrioContract = web3.eth.contract([
         ],
         "payable": false,
         "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [],
-        "name": "getTokens",
-        "outputs": [
-            {
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "pure",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [],
-        "name": "getPoolBalance",
-        "outputs": [
-            {
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [],
-        "name": "getTotalSupply",
-        "outputs": [
-            {
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [],
-        "name": "getBeneficiaryBalance",
-        "outputs": [
-            {
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
         "type": "function"
     },
     {
@@ -578,23 +492,6 @@ cherrioContract = web3.eth.contract([
         "inputs": [
             {
                 "indexed": true,
-                "name": "from",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "name": "value",
-                "type": "uint256"
-            }
-        ],
-        "name": "Burn",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": true,
                 "name": "_owner",
                 "type": "address"
             },
@@ -653,16 +550,14 @@ cherrioContract = web3.eth.contract([
     }
 ]);
 
-var cherrio = null;
-
 jQuery(document).ready(function() {
     if($('#campaign_address').length > 0){
         web3.eth.defaultAccount = web3.eth.accounts[0];
         cherrio = cherrioContract.at($("#campaign_address").val());
-        console.log($("#campaign_address").val());
     }
 });
 
+// Send user's vote to smart contract
 function AddVote(vote) {
     $('.vote-docs').html("<p>Voting in progress...</p>");
 
@@ -671,29 +566,29 @@ function AddVote(vote) {
         gas: 200000
     }, function (error, result) {
         if(!error){
-            console.log(result);
             $('.vote-docs').html("<p>Successfuly voted.</p>");
         } else{
-            console.log(error);
             $('.vote-docs').html(votingButtons);
         }
     });
 }
 
+// Checks if donator already donated
 function CheckIfDonated() {
     cherrio.balanceOf(web3.eth.defaultAccount, (error, balance) => {
         if(!error) {
-            console.log(balance);
             if(balance > 0) {
                 CheckIfVoted();
             }
         }
     });
 }
-var votingButtons = '<p><strong>VOTE DOCUMENTS</strong></p>' +
+var votingButtons = '<p><strong>VOTE FOR CREDIBILITY OF DOCUMENTS</strong></p>' +
     '<br>' +
     '<a data-vote="1" class="addVote btn-primary btn-good-bad"><i class="good-icon"></i> Good</a>' +
     '<a data-vote="0" class="addVote btn-primary btn-good-bad"><i class="bad-icon"></i> Bad</a>';
+
+// Checks if donator has permission to vote
 function CheckIfVoted(vote) {
     cherrio.checkIfVoted(web3.eth.defaultAccount, (error, status) => {
         if(!error) {

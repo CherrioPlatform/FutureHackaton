@@ -33,9 +33,9 @@ define('CONST_MEDIA_UPLOAD_URL',CONST_RELATIVE_PATH."mvp_cms/campaigns/");
 // Email SMTP config constants
 define('SMTP_PASSWORD', '');
 define('SMTP_USERNAME', '');
-define('SMTP_HOST', '');
+define('SMTP_HOST', 'mail.cherr.io');
 define('SMTP_PORT', '465');
-define('EMAIL_SENDER', 'futurehack@cherr.io');
+define('EMAIL_SENDER', '');
 define('EMAIL_TITLE', 'CHERR.IO');
 define('EMAIL_SUBJECT', '');
 
@@ -43,7 +43,6 @@ define('EMAIL_SUBJECT', '');
 define('TWITTER_CONSUMER_KEY', "");
 define('TWITTER_CONSUMER_SECRET', "");
 define('FACEBOOK_ID', "");
-
 
 // Blockchain config
 define('ETH_TESTNET', TRUE);

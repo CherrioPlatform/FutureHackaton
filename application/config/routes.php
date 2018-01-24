@@ -49,6 +49,7 @@ $route['(\w{2})/confirm-registration/(:any)'] = "login/confirm_registration/$2";
 $route['(\w{2})/forgot-password'] = "login/forgot_password";
 $route['(\w{2})/forgot-password/(:any)'] = "login/forgot_password/$2";
 $route['(\w{2})/how-to-donate'] = "page_modules/how_to_donate";
+$route['(\w{2})/emergency-pool'] = "page_modules/emergency_pool";
 $route['(\w{2})/dashboards/user_donations'] = "dashboard/user_donations";
 $route['(\w{2})/dashboards/campaign_tables'] = "dashboard/campaign_tables";
 $route['(\w{2})/dashboards/connect_with_twitter'] = "dashboard/connect_with_twitter";

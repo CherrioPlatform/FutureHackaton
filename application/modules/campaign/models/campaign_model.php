@@ -1,6 +1,10 @@
 <?php
 
 class Campaign_model extends CI_Model {
+
+    /*
+     * Return all campaigns
+     * */
     public function return_campaign($type_id = null, $lang = LANGUAGE, $order = 'page_content.datetime', $asc_desc = "DESC", $popular = false)
     {
         $this -> db -> select('page_content.id,page_content.title,,page_content.sub_title,page_content.description, page_content.duration_datetime, 
@@ -48,6 +52,10 @@ class Campaign_model extends CI_Model {
            return false;
         }
     }
+
+    /*
+     * Return campaign details by nice url
+     * */
     public function campaign_by_niceurl($nice_url = false, $campaign_type_nice_url = false, $order = 'page_content.datetime', $asc_desc = "DESC", $status_id = 1)
     {
         $this -> db -> select('page_content.id,page_content.title,page_content.sub_title,page_content.description, page_content.duration_datetime, page_content.short_description,
@@ -74,7 +82,6 @@ class Campaign_model extends CI_Model {
                 "page_content.status_id" => $status_id
             );
         }
-
        
         $this->db->join('type', 'type.id = page_content.type_id',"LEFT");
         $this->db->join('page_content_rating', 'page_content_rating.page_content_id = page_content.id',"LEFT");
@@ -89,26 +96,15 @@ class Campaign_model extends CI_Model {
        // var_dump($this->db->last_query());
         return json_encode($query -> result());
     }
-    public function campaign_updates($nice_url)
-    {
-        $this -> db -> select('campaign_updates.id, page_content.title, campaign_updates.text, campaign_updates.status_id');
-        $this->db->select("DATE_FORMAT(campaign_updates.datetime, '%d. %m. %Y %h:%i:%s') AS datetime", FALSE);
-        $this -> db -> from('campaign_updates');
-        $this->db->join('page_content', 'page_content.id = campaign_updates.page_content_id');
-        $array_where = array(
-            "page_content.nice_url" => $nice_url,
-            "campaign_updates.status_id" => 1,
-        );
-        $this->db->where($array_where);
 
-        $this -> db -> order_by("campaign_updates.datetime", "DESC");
-
-        $query = $this -> db -> get();
-        //  var_dump($this->db->last_query());
-        return json_encode($query -> result());
-    }
-    public function page_media($product_id, $type_id = null, $data_type_id = null) //$type_id 3 = image, $type_id 4 = video, $type_id 5 = audio, $type_id 6 = document // $data_type_id 1 = cover_img, $data_type_id 8 = thumbnail, 7 = main image
-    {
+    /*
+     * Return campaign's media
+     * $type_id 3 = image,
+     * $data_type_id 1 = cover_img,
+     * $data_type_id 8 = thumbnail,
+     * 7 = main image
+     * */
+    public function page_media($product_id, $type_id = null, $data_type_id = null) {
         $this -> db -> select('media_element.path, media_element.description, media_element.title');
         $this -> db -> from('media');
         $array_where = array(
@@ -130,6 +126,10 @@ class Campaign_model extends CI_Model {
         //  var_dump($this->db->last_query());
         return json_encode($query->result());
     }
+
+    /*
+     * When campaign finished, update its' status
+     * */
     public function update_campaign_status($id)
     {
         $data = array(
@@ -138,6 +138,10 @@ class Campaign_model extends CI_Model {
         $this->db->where('id', $id);
         $this->db->update('page_content', $data);
     }
+
+    /*
+     * Returns user or organization details
+     * */
     public function user_data($user_id, $nice_url = false)
     {
         $this->db->select("users.firstname, users.level, users.id AS user_id, users.lastname,users.alias,users.email, users.eth_address, users.website, users.phone, users.mobile, users.city, users.post_number, users.country, users.address, users.about_us, users.avatar_img");
@@ -157,6 +161,10 @@ class Campaign_model extends CI_Model {
         //   var_dump($this->db->last_query());
         return json_encode($query -> result());
     }
+
+    /*
+     * Save Proof of charity activity
+     * */
     public function save_proof_of_charity($user_id, $campaign_id)
     {
         if(!$this->check_ip_and_datetime($user_id,$campaign_id)){
@@ -173,6 +181,10 @@ class Campaign_model extends CI_Model {
             $this->db->insert('proof_of_charity', $data);
         }
     }
+
+    /*
+     * Security check if Proof of Charity activity was already applied on current day
+     * */
     public function check_ip_and_datetime($user_id, $page_content_id)
     {
         $this->db->select("proof_of_charity.id");
@@ -196,6 +208,10 @@ class Campaign_model extends CI_Model {
         }
 
     }
+
+    /*
+     * Get campaign and user details by alias
+     * */
     public function check_short_url($alias)
     {
         $this -> db -> select('page_content.id,page_content.title,page_content.sub_title,page_content.description, page_content.short_description, 
@@ -223,6 +239,10 @@ class Campaign_model extends CI_Model {
         return json_encode($query -> result());
 
     }
+
+    /*
+     * Check if user alias exists
+     * */
     public function check_user_alias($alias)
     {
         $this->db->select("users.id, users.alias");
@@ -237,9 +257,11 @@ class Campaign_model extends CI_Model {
         //   var_dump($this->db->last_query());
         return json_encode($query -> result());
     }
-    public function MediaUpload(){
 
-
+    /*
+     * Upload Proof of spent funds documents
+     * */
+    public function MediaUpload() {
         $allowedExts = array("jpg", "jpeg", "gif", "png");
         $extension = strtolower(end(explode(".", $_FILES["file"]["name"])));
 
@@ -275,6 +297,10 @@ class Campaign_model extends CI_Model {
             }
         }
     }
+
+    /*
+     * Generates unique filename of Proof of spent funds
+     * */
     public function GenerateUniqueFileName($file, $path, $i = 0, $original_filename, $cropped_image = false){
         if (file_exists($path.$file)) {
             $file = $original_filename;
@@ -297,6 +323,10 @@ class Campaign_model extends CI_Model {
         }
         return $file;
     }
+
+    /*
+     * Generates nice image name
+     * */
     public function niceImageName($str, $replace=array(), $delimiter='-', $options = array(), $table = null,$element_id = null) {
 
         if( !empty($replace) ) {
@@ -394,10 +424,6 @@ class Campaign_model extends CI_Model {
         // Make custom replacements
         $str = preg_replace(array_keys($options['replacements']), $options['replacements'], $str);
 
-        // Transliterate characters to ASCII
-        /*if ($options['transliterate']) {
-            $str = str_replace(array_keys($char_map), $char_map, $str);
-        }*/
         $str = str_replace(array_keys($char_map), $char_map, $str);
         // Replace non-alphanumeric characters with our delimiter
         $str = preg_replace('/[^.\p{L}\p{Nd}]+/u', $options['delimiter'], $str);
@@ -411,28 +437,7 @@ class Campaign_model extends CI_Model {
         // Remove delimiter from ends
         $str = trim($str, $options['delimiter']);
 
-        /* $find = array(
-             "ž",
-             "č",
-             "š",
-             "Ž",
-             "Č",
-             "Š",
-             "ü"
-         );
-
-         $replace = array(
-             "z",
-             "c",
-             "s",
-             "z",
-             "c",
-             "s",
-             "u"
-         );
-         $str = str_replace($find,$replace,$str);*/
         $return_str = $options['lowercase'] ? mb_strtolower($str, 'UTF-8') : $str;
         return $return_str;
-
     }
 }

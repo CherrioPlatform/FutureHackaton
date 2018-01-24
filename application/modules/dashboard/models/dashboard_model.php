@@ -1,8 +1,11 @@
 <?php
 
 class Dashboard_model extends CI_Model {
-    public function user_data($user_id, $nice_url = false)
-    {
+
+    /*
+     * Returns user or organization details
+     * */
+    public function user_data($user_id, $nice_url = false) {
         $this->db->select("users.firstname, users.lastname,users.alias,users.email, users.eth_address, users.website, users.phone, users.mobile, users.city, users.post_number, users.country, users.address, users.about_us, users.avatar_img");
         $this->db->select("DATE_FORMAT(users.datetime, '%d. %m. %Y') AS datetime", FALSE);
         $this -> db -> from('users');
@@ -20,8 +23,11 @@ class Dashboard_model extends CI_Model {
         //   var_dump($this->db->last_query());
         return json_encode($query -> result());
     }
-    public function get_poc_points($user_id)
-    {
+
+    /*
+     * Return user's Proof of Chairty points
+     * */
+    public function get_poc_points($user_id) {
         $this->db->select("proof_of_charity.id, SUM(proof_of_charity_type.points) AS poc_points");
         $this -> db -> from('proof_of_charity');
         $array_where = array(
@@ -41,8 +47,11 @@ class Dashboard_model extends CI_Model {
             return false;
         }
     }
-    public function get_campaigns($status_id = false, $type_id = 10)
-    {
+
+    /*
+     * Return campaigns
+     * */
+    public function get_campaigns($status_id = false, $type_id = 10) {
         $this -> db -> select('page_content.id, page_content.title, page_content.sub_title, page_content.eth_address, page_content.nice_url, campaign_type.nice_url AS campaign_type_nice_url, page_content.goal, type.nice_url AS type_nice_url, status.name AS status_name');
         $this->db->select("DATE_FORMAT(page_content.datetime, '%d. %m. %Y') AS datetime", FALSE);
 
@@ -73,8 +82,11 @@ class Dashboard_model extends CI_Model {
         return json_encode(array());
         //var_dump($this->db->last_query());
     }
-    public function update_twitter_user_hashtag($twitter_username, $sum, $follow)
-    {
+
+    /*
+     * Updates user's Twitter hashtag and page follow status
+     * */
+    public function update_twitter_user_hashtag($twitter_username, $sum, $follow) {
         $data = array(
             'twitter_user_hashtags' => $sum,
             'twitter_page_follow' => $follow,
@@ -82,16 +94,22 @@ class Dashboard_model extends CI_Model {
         $this->db->where('twitter_user_id', $twitter_username);
         $this->db->update('users', $data);
     }
-    public function update_twitter_username($id,$username)
-    {
+
+    /*
+     * Updates user's Twitter username
+     * */
+    public function update_twitter_username($id,$username) {
         $data = array(
             'twitter_user_id' => $username
         );
         $this->db->where('id', $id);
         $this->db->update('users', $data);
     }
-    public function get_user_share_activity($user_id)
-    {
+
+    /*
+     * Return social share activities from user
+     * */
+    public function get_user_share_activity($user_id) {
         $this->db->select("proof_of_charity.id, proof_of_charity_type.points AS poc_points, page_content.nice_url,campaign_type.nice_url AS campaign_type_nice_url, type.nice_url AS type_nice_url, page_content.title");
         $this->db->select("DATE_FORMAT(proof_of_charity.datetime, '%d. %m. %Y') AS datetime", FALSE);
 
@@ -116,8 +134,11 @@ class Dashboard_model extends CI_Model {
             return false;
         }
     }
-    public function get_user_hashtagectivity($user_id)
-    {
+
+    /*
+     * Return hahstag activities from user
+     * */
+    public function get_user_hashtagectivity($user_id) {
         $this->db->select("twitter_user_hashtags, twitter_page_follow");
 
         $this -> db -> from('users');
