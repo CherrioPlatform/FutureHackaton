@@ -1,8 +1,157 @@
 pragma solidity ^0.4.19;
 
-import './SafeMath/SafeMath.sol';
-import './Token/StandardToken.sol';
-import './Ownable/Ownable.sol';
+/**
+ * @title SafeMath
+ * @dev Math operations with safety checks that throw on error
+ */
+library SafeMath {
+    function mul(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a * b;
+        assert(a == 0 || c / a == b);
+
+        return c;
+    }
+
+    function div(uint256 a, uint256 b) internal pure returns (uint256) {
+        // assert(b > 0); // Solidity automatically throws when dividing by 0
+        uint256 c = a / b;
+
+        // assert(a == b * c + a % b); // There is no case in which this doesn't hold
+        return c;
+    }
+
+    function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+        assert(b <= a);
+
+        return a - b;
+    }
+
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        assert(c >= a);
+
+        return c;
+    }
+}
+
+/**
+ * @title Ownable
+ * @dev The Ownable contract has an owner address and
+ *      provides basic authorization control functions
+ */
+contract Ownable {
+    // Public properties
+    address public owner;
+
+    // Log if ownership has been changed
+    event ChangeOwnership(address indexed _owner, address indexed _newOwner);
+
+    // Checks if address is an owner
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+
+        _;
+    }
+
+    // The Ownable constructor sets the owner address
+    function Ownable() public {
+        owner = msg.sender;
+    }
+
+    // Transfer current ownership to the new account
+    function transferOwnership(address _newOwner) public onlyOwner {
+        require(
+            _newOwner != owner &&
+            _newOwner != address(0x0)
+        );
+
+        ChangeOwnership(owner, _newOwner);
+
+        owner = _newOwner;
+    }
+}
+
+/**
+ * @title ERC20 Interface
+ * @dev https://github.com/ethereum/EIPs/issues/20
+ */
+contract ERC20Basic {
+    uint256 public totalSupply;
+
+    function balanceOf(address _address) public constant returns(uint256);
+    function transfer(address _to, uint256 _value) public returns(bool);
+
+    event Transfer(address indexed _from, address indexed _to, uint256 _value);
+}
+
+/**
+ * @title ERC20 Interface
+ * @dev https://github.com/ethereum/EIPs/issues/20
+ */
+contract ERC20 is ERC20Basic {
+    function allowance(address _owner, address _spender) public constant returns(uint256);
+    function approve(address _spender, uint256 _value) public returns(bool);
+    function transferFrom(address _from, address _to, uint256 _value) public returns(bool);
+
+    event Approval(address indexed _owner, address indexed _spender, uint256 _value);
+}
+
+contract BasicToken is ERC20Basic {
+    using SafeMath for uint256;
+
+    // Balances for each account
+    mapping(address => uint256) balances;
+
+    // Returns the token balance for account
+    function balanceOf(address _address) public constant returns (uint256 balance) {
+        return balances[_address];
+    }
+
+    // Transfer the balance from owner's account to another account
+    function transfer(address _to, uint256 _value) public returns (bool success) {
+        balances[msg.sender] = balances[msg.sender].sub(_value);
+        balances[_to] = balances[_to].add(_value);
+
+        Transfer(msg.sender, _to, _value);
+
+        return true;
+    }
+}
+
+contract StandardToken is BasicToken, ERC20 {
+    // Owner of account approves the transfer of an amount to another account
+    mapping (address => mapping (address => uint256)) allowed;
+
+    // Returns the amount of tokens approved by the owner that can be transferred to the spender's account
+    function allowance(address _owner, address _spender) public constant returns (uint256 remaining) {
+        return allowed[_owner][_spender];
+    }
+
+    // Token owner can approve for spender to transfer tokens from the token owner's account
+    function approve(address _spender, uint256 _value) public returns(bool success) {
+        require(
+            allowed[msg.sender][_spender] == 0 &&
+            _value > 0
+        );
+
+        allowed[msg.sender][_spender] = _value;
+
+        Approval(msg.sender, _spender, _value);
+
+        return true;
+    }
+
+    // Transfer tokens from one account to another account
+    function transferFrom(address _from, address _to, uint256 _value) public returns (bool success) {
+        balances[_from] = balances[_from].sub(_value);
+        allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(_value);
+        balances[_to] = balances[_to].add(_value);
+
+        Transfer(_from, _to, _value);
+
+        return true;
+    }
+}
 
 contract CherrioMVPToken is StandardToken, Ownable {
     using SafeMath for uint256;
