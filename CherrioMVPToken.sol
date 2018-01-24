@@ -39,17 +39,14 @@ contract CherrioMVPToken is StandardToken, Ownable {
         bool  hasVoted;
     }
 
-    // All accounts who voted
     mapping(address => Voter) voters;
 
-    // Checks if campaign is already ended
     modifier IsCampaignEnded() {
         require(!isCampaignEnded);
 
         _;
     }
 
-    // Checks if donator can vote
     modifier CanVote() {
         require(canVote);
 
@@ -59,17 +56,19 @@ contract CherrioMVPToken is StandardToken, Ownable {
     /**
      * The listed addresses are not valid recipients of tokens.
      *
-     * 0x0         - The zero address is not valid
-     * this        - The contract itself should not receive tokens
-     * owner       - The owner has all the initial tokens, but cannot receive any back
-     * beneficiary - The address of campain who receives tokens after campaign is finished
+     * 0x0           - The zero address is not valid
+     * this          - The contract itself should not receive tokens
+     * owner         - The owner has all the initial tokens, but cannot receive any back
+     * beneficiary   - The address of campain who receives tokens after campaign is finished
+     * emergencyPool - The address of emergency pool
      */
     modifier CheckValidAddressDestination(address _to) {
         require(
             _to != address(0x0) &&
             _to != address(this) &&
             _to != owner &&
-            _to != beneficiary
+            _to != beneficiary &&
+            _to != emergencyPool
         );
 
         _;
@@ -78,7 +77,11 @@ contract CherrioMVPToken is StandardToken, Ownable {
     // This notifies clients about the amount burnt
     event Burn(address indexed from, uint256 value);
 
-    // Constructor
+    /**
+     * @dev constructor
+     * @param _beneficiary   The address of beneficiary
+     * @param _emergencyPool The address of emergency pool
+     */
     function CherrioMVPToken(address _beneficiary, address _emergencyPool) public {
         totalSupply = INITIAL_SUPPLY;
 
@@ -88,21 +91,19 @@ contract CherrioMVPToken is StandardToken, Ownable {
         emergencyPool = _emergencyPool;
     }
 
+    /**
+     * @dev Fallback function that validates:
+     * - if campaing reached hard cap or time expired
+     * - if conditions are met
+     */
     function () public IsCampaignEnded CheckValidAddressDestination(msg.sender) payable {
         require(msg.value > 0);
 
         uint256 availableEthers = getAvailableEthers();
-        uint256 refund = 0;
 
-        if(msg.value >= availableEthers) {
-            refund = msg.value.sub(availableEthers);
-            msg.sender.transfer(refund);
+        require(msg.value <= availableEthers);
 
-            isCampaignEnded = true;
-            withdrawFunds(false, false);
-        }
-
-        etherReceived = etherReceived.add(msg.value.sub(refund));
+        etherReceived = msg.value;
 
         if(balances[msg.sender] == 0) {
             numberOfDonators++;
@@ -110,6 +111,10 @@ contract CherrioMVPToken is StandardToken, Ownable {
 
         balances[owner] = balances[owner].sub(NUM_OF_TOKENS);
         balances[msg.sender] = balances[msg.sender].add(NUM_OF_TOKENS);
+
+        if(etherReceived == CAMPAIGN_CAP) {
+            withdrawFunds(false, false);
+        }
     }
 
     function getAvailableEthers() internal view returns(uint256) {
@@ -122,6 +127,10 @@ contract CherrioMVPToken is StandardToken, Ownable {
         withdrawFunds(false, false);
     }
 
+    /**
+     * @dev Gives voting permission to donator
+     * @param _vote Possible value of 1 or 0
+     */
     function addVote(uint8 _vote) public CanVote {
         require(
             balances[msg.sender] > 0 &&
@@ -141,7 +150,12 @@ contract CherrioMVPToken is StandardToken, Ownable {
         checkVotesRate();
     }
 
-    function checkVotesRate() internal returns(bool) {
+    /**
+     * @dev Checks if outcome of voting:
+     * - is positive (more than 50% of donators voted with 1)
+     * - is negative (more than 50% of donators voted with 0)
+     */
+    function checkVotesRate() internal {
         if(secondWithdraw) {
             return;
         }
@@ -169,7 +183,9 @@ contract CherrioMVPToken is StandardToken, Ownable {
     }
 
     /**
+     * @dev Withdraw funds to beneficiary address or to emergency pool address
      * @param _transferSecondWithdraw True if votes has already been checked
+     * @param _transferToEmergencyPool When true, funds automatically transferred to emergency pool
      */
     function withdrawFunds(bool _transferSecondWithdraw, bool _transferToEmergencyPool) internal {
         if(!firstWithdraw) {
@@ -194,6 +210,22 @@ contract CherrioMVPToken is StandardToken, Ownable {
         }
     }
 
+    function getTokens() public pure returns(uint256) {
+        return NUM_OF_TOKENS;
+    }
+
+    function getTotalSupply() public view returns(uint256) {
+        return totalSupply;
+    }
+
+    function getCap() public pure returns(uint256) {
+        return CAMPAIGN_CAP;
+    }
+
+    function getCanVote() public view returns(bool) {
+        return canVote;
+    }
+
     function getBalance() public view returns(uint256) {
         return this.balance;
     }
@@ -202,12 +234,8 @@ contract CherrioMVPToken is StandardToken, Ownable {
         return beneficiary.balance;
     }
 
-    function getEmergencyPoolBalance() public view returns(uint256) {
+    function getPoolBalance() public view returns(uint256) {
         return emergencyPool.balance;
-    }
-
-    function getCanVote() public view returns(bool) {
-        return canVote;
     }
 
     function getVoterVote(address _address) public view returns(uint256) {
