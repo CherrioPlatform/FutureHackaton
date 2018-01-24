@@ -1,6 +1,31 @@
+# Vision, Goals & Roadmap
+
+Read our [Vision, Goals & Roadmap](https://github.com/CherrioPlatform/FutureHackaton/wiki/Vision,-Goals-&-Roadmap).
+
+# Demo
+
+Check out our [LIVE DEMO](http://futurehack.cherr.io/).
+
+
+# Instructions to test the platform
+
+Read our [instructions](https://github.com/CherrioPlatform/FutureHackaton/wiki/Donation-process) step by step.
+
 # Installation guide
 
 ### Prerequisites:
+
+Install local environment with Apache server and MySQL database using this tutorial: 
+
+https://netbeans.org/kb/docs/php/configure-php-environment-windows.htm (Windows)
+
+or
+
+https://www.ntu.edu.sg/home/ehchua/programming/webprogramming/AMP_Setup.html (Linux)
+
+Get `git` client from:
+
+https://git-scm.com/downloads
 
 Install `git` client and clone FutureHackaton repository:
 
@@ -20,7 +45,7 @@ Checkout **database** branch:
 ```bash
 git checkout https://github.com/CherrioPlatform/FutureHackaton.git
 ```
-Execute `databaseMPV.sql` to deploy all required tables. Tables are already populated with demo data.
+Execute `databaseMVP.sql` to deploy all required tables. Tables are already populated with demo data.
 
 ## Platform
 
@@ -35,7 +60,7 @@ Apache server that supports `PHP` (tested with `PHP` version 5.6.3)
 git checkout https://github.com/CherrioPlatform/FutureHackaton.git
 ```
 - Move all data to path, where you want to be located.
-- Update config file (application/config/database.php) with connections string and authentication data from your database server. If used on same machine, you can use localhost.
+- Update config file (application/config/database.php) with connections string and authentication data from your database server. If used on same machine, you can use `localhost`.
 - Update Twitter and Facebook authorization tokens (application/config/constants.php):
 ```bash
 TWITTER_CONSUMER_KEY
@@ -47,7 +72,7 @@ FACEBOOK_ID
 
 ### Requirements: 
 
-All smart contracts should be deployed on Rinkeby Ethereum testnet (Solidity v.0.4.19 used)
+All smart contracts should be deployed on Rinkeby Ethereum Network (Solidity v.0.4.19 used)
 
 ### Installation:
 
@@ -55,5 +80,12 @@ All smart contracts should be deployed on Rinkeby Ethereum testnet (Solidity v.0
 ```bash
 git checkout https://github.com/CherrioPlatform/FutureHackaton.git
 ```
-- Deploy campaignToken.sol using environment of your choice (e.g. Online Solidity Browser version 0.4.20 commit)
+- Deploy `campaignMVPToken.sol` using environment of your choice (e.g. Online Solidity Browser version 0.4.20 commit)
 - Check on Etherscan.io for smart contract's address.
+
+### Usage:
+
+To use some of our features (e.g. voting for campaign documents), you need to install `MetaMask` plugin. MetaMask should be used with Rinkeby Ethereum Network. We kindly suggest to create new ETH address when Rinkeby Ethereum Network is selected.
+This ETH address should be used in registration and also when sending Ethers.
+
+How to install MetaMask you can check here: https://www.cryptocompare.com/wallets/guides/how-to-use-metamask/
